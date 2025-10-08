@@ -2,7 +2,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="py-12 px-4 bg-dracula-background">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-1 gap-8 mb-8">
+        <div className="flex flex-col gap-8 mb-8">
           <div className="flex flex-col items-center">
             <div className="flex items-center space-x-2 mb-4">
               <span className="text-3xl">📦</span>
@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
                 Pocketeer
               </span>
             </div>
-            <p className="text-dracula-text-secondary">
+            <p className="text-dracula-text-secondary text-center">
               Inventory & project management for creative minds.
             </p>
           </div>
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
                 "linear-gradient(to right, var(--color-dracula-background), var(--color-dracula-current-line), var(--color-dracula-background)) 1",
             }}
           >
-            <p>&copy; 2025 Pocketeer. All rights reserved.</p>
+            <p className="px-4">&copy; 2025 Pocketeer. All rights reserved.</p>
           </div>
         </div>
       </div>
