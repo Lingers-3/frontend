@@ -23,6 +23,17 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Pocketeer | Inventory & project management " },
+    {
+      name: "description",
+      content:
+        "Cloud-backed inventory and project management for hobbyists and micro-businesses.",
+    },
+  ];
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
