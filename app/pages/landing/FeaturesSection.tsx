@@ -49,7 +49,7 @@ const FeaturesSection: React.FC = () => {
   return (
     <section
       id="features"
-      className="py-20 px-4 border-t-[5px] border-b-[5px] border-dashed border-dracula-pink"
+      className="py-20 px-6 border-t-[5px] border-b-[5px] border-dashed border-dracula-pink"
       style={{
         background:
           "linear-gradient(135deg, var(--color-dracula-background) 0%, var(--color-dracula-current-line) 50%, var(--color-dracula-background) 100%)",
