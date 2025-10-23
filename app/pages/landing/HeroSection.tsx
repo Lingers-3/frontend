@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { GradientButton } from "~/components/primitives/GradientButton";
 
 const HeroSection: React.FC = () => {
   return (
@@ -18,14 +19,8 @@ const HeroSection: React.FC = () => {
           empire.
         </p>
         <div className="flex flex-row gap-4 justify-center mb-12">
-          <Link
-            to="/signup"
-            className="cursor-pointer px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(189,147,249,0.4)]"
-            style={{
-              background: "linear-gradient(135deg, #8560c7, #bf5a99)",
-            }}
-          >
-            Get started for free
+          <Link to="/inventory">
+            <GradientButton>Get started for free</GradientButton>
           </Link>
         </div>
 
