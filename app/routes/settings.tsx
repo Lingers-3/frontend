@@ -1,25 +1,10 @@
-import { Link } from "react-router";
+import SettingsPage from "~/pages/settings";
 import type { Route } from "./+types/settings";
-import { AppSidebarTrigger } from "~/components/app/AppSidebar";
-import { GradientButton } from "~/components/primitives/GradientButton";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Settings" }];
 }
 
 export default function Settings() {
-  return (
-    <div className="flex flex-col h-screen">
-      <div className="flex p-7">
-        <AppSidebarTrigger />
-      </div>
-
-      <div className="flex-1 p-8 flex flex-col justify-center items-center gap-12">
-        <h1 className="text-3xl font-bold">Settings page</h1>
-        <Link to="/">
-          <GradientButton>Go home</GradientButton>
-        </Link>
-      </div>
-    </div>
-  );
+  return <SettingsPage />;
 }
