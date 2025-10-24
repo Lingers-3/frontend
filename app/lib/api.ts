@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const baseURL = 'https://pocketeer-api.linerds.us/api';
+
 const api = axios.create({
-  baseURL: 'https://pocketeer-api.linerds.us/api',
+  baseURL,
   withCredentials: true, 
   headers: {
     'Content-Type': 'application/json',

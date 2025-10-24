@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="w-screen h-screen bg-black">
+      <main className="w-screen h-screen bg-dracula-background">
         <Outlet />
       </main>
     </SidebarProvider>

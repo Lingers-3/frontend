@@ -44,8 +44,10 @@ export class auth {
   }
 
   static login() {
-    window.location.href = 'https://pocketeer-api.linerds.us/api/auth/login';
+    const redirectUri = `${window.location.origin}/inventory`;
+    window.location.href = `https://pocketeer-api.linerds.us/api/auth/login?redirect_uri=${encodeURIComponent(redirectUri)}`;
   }
+  
 
   static logout() {
     window.location.href = 'https://pocketeer-api.linerds.us/api/auth/logout';
