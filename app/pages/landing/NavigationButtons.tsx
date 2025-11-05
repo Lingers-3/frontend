@@ -8,17 +8,13 @@ const NavigationButtons: React.FC = () => {
     <div className="flex gap-4 items-center">
       <button
         className="cursor-pointer px-4 py-2 rounded-xl font-semibold border-2 border-dracula-cyan text-dracula-cyan transition-all duration-300 hover:bg-dracula-cyan hover:text-dracula-background hover:shadow-[0_0_20px_rgba(139,233,253,0.4)]"
-        onClick={() => {
-          auth.login();
-        }}
+        onClick={auth.login}
       >
         Login
       </button>
-      <Link to="/signup">
-        <GradientButton className="px-4 py-2">
-          Sign up
-        </GradientButton>
-      </Link>
+      <GradientButton className="px-4 py-2" onClick={auth.login}>
+        Sign up
+      </GradientButton>
       <ToggleThemeButton />
     </div>
   );

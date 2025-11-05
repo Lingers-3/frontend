@@ -1,9 +1,7 @@
 import axios from "axios";
 
-const baseURL = 'https://pocketeer-api.linerds.us/api';
-
 const api = axios.create({
-  baseURL,
+  baseURL: import.meta.env.VITE_BASE_API_URL,
   withCredentials: true, 
   headers: {
     'Content-Type': 'application/json',
@@ -16,5 +14,10 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export interface ApiError {
+  status?: number;
+  message: string;
+}
 
 export default api;

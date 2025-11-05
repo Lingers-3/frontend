@@ -1,7 +1,11 @@
 import { Link } from "react-router";
 import { GradientButton } from "~/components/primitives/GradientButton";
+import { useUser } from "~/hooks/use-user";
+import { auth } from "~/services/auth";
 
 const HeroSection: React.FC = () => {
+  const { data: user } = useUser();
+
   return (
     <section className="pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto text-center">
@@ -19,9 +23,15 @@ const HeroSection: React.FC = () => {
           empire.
         </p>
         <div className="flex flex-row gap-4 justify-center mb-12">
-          <Link to="/inventory">
-            <GradientButton>Get started for free</GradientButton>
-          </Link>
+          {!user || !user.email_verified ? (
+            <GradientButton onClick={auth.login}>
+              Get started for free
+            </GradientButton>
+          ) : (
+            <Link to="/inventory">
+              <GradientButton>Get started for free</GradientButton>
+            </Link>
+          )}
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
