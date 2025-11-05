@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import type { Route } from "./+types/root";
 import "./app.css";
 
@@ -63,13 +65,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 10,
+      staleTime: 5 * 60 * 1000,
+      retry: false,
+      refetchOnWindowFocus: false,
     },
   },
 });
@@ -77,8 +78,7 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet /> 
-      <ReactQueryDevtools buttonPosition="bottom-right" />
+      <Outlet />
     </QueryClientProvider>
   );
 }
