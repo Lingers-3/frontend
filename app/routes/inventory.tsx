@@ -1,10 +1,35 @@
+import { useEffect } from "react";
 import type { Route } from "./+types/inventory";
-import AppEmpty from "~/components/app/AppEmpty";
+import { Outlet, useLocation, useNavigate } from "react-router";
+import { AppSidebarTrigger } from "~/components/app/AppSidebar";
+import ToggleThemeButton from "~/components/primitives/ToggleThemeButton";
+import { ViewModeSwitch } from "~/pages/inventory/ViewModeSwitch";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Inventory" }];
 }
 
-export default function Inventory() {
-  return <AppEmpty />;
+export default function InventoryLayout() {
+  const nav = useNavigate();
+  const loc = useLocation();
+
+  useEffect(() => {
+    if (loc.pathname === "/inventory") nav("types", { replace: true });
+  }, [loc.pathname, nav]);
+
+  return (
+    <div className="bg-dracula-background h-screen flex flex-col"> 
+      <div className="p-7 pb-0 flex flex-col items-center justify-center flex-shrink-0"> 
+        <div className="flex w-full justify-between">
+          <AppSidebarTrigger />
+          <ViewModeSwitch />
+          <ToggleThemeButton />
+        </div>
+      </div>
+      
+      <div className="flex-1 overflow-auto"> 
+        <Outlet />
+      </div>
+    </div>
+  );
 }

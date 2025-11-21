@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import {
   Sidebar,
   SidebarContent,
@@ -13,14 +13,14 @@ import {
   FolderPen,
   LayoutTemplate,
   Settings,
-  Package,
 } from "lucide-react";
 
 export function AppSidebar() {
   const { isMobile, toggleSidebar } = useSidebar();
+    const location = useLocation();
 
   const menuItems = [
-    { name: "Inventory", path: "/inventory", icon: <Drill /> },
+    { name: "Inventory", path: "/inventory/types", icon: <Drill /> },
     { name: "Projects", path: "/projects", icon: <FolderPen /> },
     { name: "Templates", path: "/templates", icon: <LayoutTemplate /> },
   ];
@@ -51,15 +51,20 @@ export function AppSidebar() {
                   <NavLink
                     to={item.path}
                     key={item.name}
-                    className={({ isActive }) =>
-                      `w-full text-lg flex items-center px-6 gap-4 py-4 cursor-pointer rounded-xl 
+                    className={({ isActive }) => {
+                      const active =
+                        item.path === "/inventory/types"
+                          ? location.pathname.startsWith("/inventory")
+                          : isActive;
+
+                      return `w-full text-lg flex items-center px-6 gap-4 py-4 cursor-pointer rounded-xl 
                       ${
-                        isActive
+                        active
                           ? "bg-dracula-current-line/50 text-accent-foreground font-semibold"
                           : "text-font-primarly hover:bg-dracula-current-line/30 hover:text-accent-foreground"
-                      } 
-                      transition-colors duration-200`
-                    }
+                      }
+                      transition-colors duration-200`;
+                    }}
                     onClick={() => {
                       if (isMobile) toggleSidebar();
                     }}
