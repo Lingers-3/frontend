@@ -8,6 +8,7 @@ import {
 import { useDeleteItem } from "~/hooks/inventory-hooks";
 import ItemDialog from "./ItemDialog";
 import type { ItemFull } from "~/services/item/types";
+import { toast } from "sonner";
 
 export function ItemCardOptions({ item }: { item: ItemFull }) {
   const { mutate: deleteItem } = useDeleteItem();
@@ -52,7 +53,14 @@ export function ItemCardOptions({ item }: { item: ItemFull }) {
 
         <button
           onClick={() => {
-            deleteItem({ id: item.id, force: true });
+            if (
+              confirm(
+                "Are you sure you want to delete this item? This action cannot be undone."
+              )
+            ) {
+              deleteItem({ id: item.id, force: true });
+              toast.info("Item deleted");
+            }
           }}
           className="w-full text-left px-4 py-2 text-sm text-dracula-red hover:bg-dracula-current-line flex items-center gap-2 rounded-md"
         >

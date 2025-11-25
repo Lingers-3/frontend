@@ -42,7 +42,7 @@ export default function ItemForm({
           {(field) => (
             <div className="space-y-1">
               <Label htmlFor={field.name} className="text-dracula-foreground">
-                Item Type ID
+                Item type ID
               </Label>
               <Input
                 id={field.name}
@@ -155,7 +155,7 @@ export default function ItemForm({
           {(field) => (
             <div className="space-y-1">
               <Label htmlFor={field.name} className="text-dracula-foreground">
-                Expiration Date
+                Expiration date
               </Label>
               <Input
                 id={field.name}

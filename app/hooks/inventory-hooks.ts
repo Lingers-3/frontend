@@ -2,8 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { item } from "~/services/item";
 import { itemType } from "~/services/itemType";
 import { tag } from "~/services/tag";
-import type { ApiError } from "~/lib/api";
-import type { Result } from "~/lib/result";
+import { unwrap } from "~/lib/result";
 import type { ItemCreate, ItemUpdate } from "~/services/item/types";
 import type { ItemTypeCreate, ItemTypeUpdate } from "~/services/itemType/types";
 import type { TagCreate, TagUpdate } from "~/services/tag/types";
@@ -23,14 +22,6 @@ export const INVENTORY_KEYS = {
     list: ["inventory", "tags", "list"] as const,
   },
 };
-
-async function unwrap<T>(promise: Promise<Result<T, ApiError>>): Promise<T> {
-  const result = await promise;
-  if (result.ok) {
-    return result.value;
-  }
-  throw result.error; 
-}
 
 export const useItemTypesFull = () => {
   return useQuery({

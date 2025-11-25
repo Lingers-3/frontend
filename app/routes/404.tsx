@@ -4,7 +4,7 @@ import type { Route } from "./+types/404";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Pocketeer | 404 Not found " },
+    { title: "404 Not found | Pocketeer" },
     {
       name: "description",
       content: "The page you are looking for does not exist.",

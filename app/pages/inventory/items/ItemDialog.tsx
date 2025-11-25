@@ -52,7 +52,7 @@ export default function ItemDialog({
             </div>
             <div>
               <DialogTitle className="text-dracula-foreground text-xl">
-                {mode === "create" ? "Add Item" : "Edit Item"}
+                {mode === "create" ? "Add item" : "Edit item"}
               </DialogTitle>
               <DialogDescription className="text-dracula-comment">
                 {mode === "create"

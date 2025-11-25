@@ -3,20 +3,20 @@ import { type RouteConfig, index, route } from "@react-router/dev/routes";
 export default [
   index("routes/home.tsx"),
 
-  route("", "routes/layout.tsx", { id: "app" }, [
-    route("inventory", "./routes/inventory.tsx", [
-      route("types", "./pages/inventory/itemTypes/layout.tsx", [
-        index("./pages/inventory/itemTypes/index.tsx"),
-        route(":itemTypeId", "./pages/inventory/itemTypes/ItemTypePage.tsx"),
+  route("", "routes/app/index.tsx", { id: "app" }, [
+    route("inventory", "./routes/app/inventory/index.tsx", [
+      route("types", "./routes/app/inventory/itemTypes/layout.tsx", [
+        index("./routes/app/inventory/itemTypes/index.tsx"),
+        route(":itemTypeId", "./routes/app/inventory/itemTypes/itemTypePage.tsx"),
       ]),
-      route("items", "./pages/inventory/items/layout.tsx", [
-        index("./pages/inventory/items/index.tsx"),
+      route("items", "./routes/app/inventory/items/layout.tsx", [
+        index("./routes/app/inventory/items/index.tsx"),
       ]),
     ]),
 
-    route("projects", "./routes/projects.tsx"),
-    route("templates", "./routes/templates.tsx"),
-    route("settings", "./routes/settings.tsx"),
+    route("projects", "./routes/app/projects.tsx"),
+    route("templates", "./routes/app/templates.tsx"),
+    route("settings", "./routes/app/settings.tsx"),
   ]),
 
   route("error", "./routes/error.tsx"),

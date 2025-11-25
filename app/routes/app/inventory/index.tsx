@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import type { Route } from "./+types/inventory";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { AppSidebarTrigger } from "~/components/app/AppSidebar";
 import ToggleThemeButton from "~/components/primitives/ToggleThemeButton";
 import { ViewModeSwitch } from "~/pages/inventory/ViewModeSwitch";
+import type { Route } from "./items/+types";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "Inventory" }];
+  return [{ title: "Inventory | Pocketeer" }];
 }
 
 export default function InventoryLayout() {

@@ -82,7 +82,7 @@ export default function ItemTypeForm({
           {(field) => (
             <div className="space-y-1">
               <Label htmlFor={field.name} className="text-dracula-foreground">
-                Base Unit
+                Base unit
               </Label>
               <Input
                 id={field.name}
@@ -106,7 +106,7 @@ export default function ItemTypeForm({
           {(field) => (
             <div className="space-y-1">
               <Label htmlFor={field.name} className="text-dracula-foreground">
-                Display Unit
+                Display unit
               </Label>
               <Input
                 id={field.name}
@@ -132,7 +132,7 @@ export default function ItemTypeForm({
           {(field) => (
             <div className="space-y-1">
               <Label htmlFor={field.name} className="text-dracula-foreground">
-                Default Qty
+                Default quantity
               </Label>
               <Input
                 id={field.name}
@@ -156,7 +156,7 @@ export default function ItemTypeForm({
           {(field) => (
             <div className="space-y-1">
               <Label htmlFor={field.name} className="text-dracula-foreground">
-                Shortage Limit
+                Shortage limit
               </Label>
               <Input
                 id={field.name}

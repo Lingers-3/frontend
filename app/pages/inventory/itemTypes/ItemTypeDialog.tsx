@@ -41,7 +41,7 @@ export default function ItemTypeDialog({
             </div>
             <div>
               <DialogTitle className="text-dracula-foreground text-xl">
-                {mode === "create" ? "Create Item Type" : "Edit Item Type"}
+                {mode === "create" ? "Create item type" : "Edit item type"}
               </DialogTitle>
               <DialogDescription className="text-dracula-comment">
                 {mode === "create"

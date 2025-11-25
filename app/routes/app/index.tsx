@@ -1,13 +1,13 @@
-import { Outlet, redirect, useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import { AppSidebar } from "~/components/app/AppSidebar";
 import { SidebarProvider } from "~/components/ui/sidebar";
-import type { Route } from "./+types/layout";
 import { auth } from "~/services/auth";
 import { LoaderIcon } from "lucide-react";
 import { userQueryKey, userQueryFn } from "~/hooks/use-user";
 import { queryClient } from "~/root";
 import { useUser } from "~/hooks/use-user";
 import { useEffect } from "react";
+import type { Route } from "./+types";
 
 export async function clientLoader(_: Route.ClientLoaderArgs) {
   try {

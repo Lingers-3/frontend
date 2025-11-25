@@ -62,7 +62,7 @@ export const ItemInfoDialog = ({
             </div>
             <div className="flex-1">
               <DialogTitle className="text-dracula-foreground text-xl">
-                Item Details
+                Item details
               </DialogTitle>
               <DialogDescription className="text-dracula-comment">
                 View and manage this item's information
@@ -118,10 +118,10 @@ export const ItemInfoDialog = ({
               <div className="bg-dracula-current-line rounded-lg p-3 border border-dracula-selection">
                 <div className="flex items-center gap-1.5 text-xs text-dracula-comment mb-1">
                   <DollarSign className="w-3 h-3" />
-                  Purchase Price
+                  Purchase price
                 </div>
                 <div className="text-lg font-bold text-dracula-green font-mono">
-                  ${item.purchase_price.toFixed(2)}
+                  ${(item.purchase_price?.toFixed(2) ?? '0.00')}
                 </div>
               </div>
             )}
@@ -185,7 +185,7 @@ export const ItemInfoDialog = ({
               trigger={
                 <button className="cursor-pointer flex-1 flex items-center justify-center gap-2 bg-dracula-purple hover:bg-dracula-purple/90 text-dracula-background font-semibold px-4 py-2.5 rounded-lg transition-colors text-sm">
                   <Edit className="w-4 h-4" />
-                  Edit Item
+                  Edit item
                 </button>
               }
             />

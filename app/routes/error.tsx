@@ -2,7 +2,7 @@ import { Link, useSearchParams } from "react-router";
 import type { Route } from "./+types/error";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "Error occurred" }];
+  return [{ title: "Error occurred | Pocketeer" }];
 }
 
 export default function Error() {

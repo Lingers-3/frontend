@@ -63,7 +63,7 @@ export const ItemCard = ({ item }: { item: ItemFull }) => {
             <div className="flex items-center justify-between text-xs">
               <span className="text-dracula-comment">Price</span>
               <span className="text-dracula-green font-mono font-semibold">
-                ${item.purchase_price.toFixed(2)}
+                ${(item.purchase_price?.toFixed(2) ?? '0.00')}
               </span>
             </div>
           )}

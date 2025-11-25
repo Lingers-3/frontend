@@ -5,7 +5,7 @@ import { useAppForm } from "~/hooks/use-app-form";
 import type { ItemFormProps } from "~/pages/inventory/items/ItemForm";
 
 const itemSchema = z.object({
-  item_type_id: z.coerce.number().min(1, "Item Type ID is required"),
+  item_type_id: z.coerce.number().min(1, "Item type ID is required"),
   description: z.string().optional().nullable(),
   quantity: z.coerce.number("Must be a number"),
   display_measurement_unit: z.string().optional().nullable(),
