@@ -9,8 +9,12 @@ const itemTypeSchema = z.object({
   description: z.string().optional().nullable(),
   base_measurement_unit: z.string().min(1, "Base unit is required"),
   display_measurement_unit: z.string().min(1, "Display unit is required"),
-  default_quantity: z.coerce.number("Must be a number"),
-  shortage_threshold: z.coerce.number("Must be a number"),
+  default_quantity: z.coerce
+    .number("Must be a number")
+    .nonnegative("Must not be negative"),
+  shortage_threshold: z.coerce
+    .number("Must be a number")
+    .nonnegative("Must not be negative"),
 });
 
 export function useItemTypeForm({

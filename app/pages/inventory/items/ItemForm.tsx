@@ -1,9 +1,7 @@
 import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
-import { Textarea } from "~/components/ui/textarea";
 import { useItemForm } from "~/hooks/use-item-form";
 import type { ItemFull } from "~/services/item/types";
+import { AppFormField } from "~/components/form-components/AppFormField"; 
 
 export interface ItemFormProps {
   mode: "create" | "update";
@@ -38,137 +36,52 @@ export default function ItemForm({
       className="space-y-4 mt-2"
     >
       {mode === "create" && !defaultItemTypeId && (
-        <form.AppField name="item_type_id">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Item type ID
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                type="number"
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                placeholder="ID"
-              />
-              {field.state.meta.errors.length > 0 && (
-                <p className="text-dracula-red text-xs">
-                  {field.state.meta.errors[0]}
-                </p>
-              )}
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="item_type_id"
+          label="Item type ID"
+          placeholder="ID"
+        />
       )}
 
-      <form.AppField name="description">
-        {(field) => (
-          <div className="space-y-1">
-            <Label htmlFor={field.name} className="text-dracula-foreground">
-              Description
-            </Label>
-            <Textarea
-              id={field.name}
-              name={field.name}
-              value={field.state.value || ""}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              className="bg-dracula-current-line border-dracula-selection text-dracula-foreground resize-none"
-              placeholder="Item description (e.g. Brand, Variant)..."
-            />
-          </div>
-        )}
-      </form.AppField>
+      <AppFormField
+        form={form}
+        name="description"
+        label="Description"
+        placeholder="Item description (e.g. Brand, Variant)..."
+        isTextarea
+      />
 
       <div className="grid grid-cols-2 gap-4">
-        <form.AppField name="quantity">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Quantity
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                type="number"
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                placeholder="0"
-              />
-              {field.state.meta.errors.length > 0 && (
-                <p className="text-dracula-red text-xs">
-                  {field.state.meta.errors[0]}
-                </p>
-              )}
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="quantity"
+          label="Quantity"
+          placeholder="0"
+        />
 
-        <form.AppField name="display_measurement_unit">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Unit
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                placeholder="e.g. pcs, kg"
-              />
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="display_measurement_unit"
+          label="Unit"
+          placeholder="e.g. pcs, kg"
+        />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <form.AppField name="purchase_price">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Price
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                type="number"
-                step="0.01"
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                placeholder="0.00"
-              />
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="purchase_price"
+          label="Price"
+          placeholder="0.00"
+        />
 
-        <form.AppField name="expiration_date">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Expiration date
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                type="date"
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-              />
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="expiration_date"
+          label="Expiration date"
+          type="date"
+        />
       </div>
 
       <div className="flex justify-end gap-3 mt-6">
@@ -191,8 +104,8 @@ export default function ItemForm({
               ? "Creating..."
               : "Updating..."
             : mode === "create"
-              ? "Add Item"
-              : "Save Changes"}
+              ? "Add item"
+              : "Save changes"}
         </Button>
       </div>
     </form>

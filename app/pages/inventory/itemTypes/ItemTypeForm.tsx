@@ -1,7 +1,5 @@
 import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
-import { Textarea } from "~/components/ui/textarea";
+import { AppFormField } from "~/components/form-components/AppFormField";
 import type { ItemTypeFull } from "~/services/itemType/types";
 import { useItemTypeForm } from "~/hooks/use-item-type-form";
 
@@ -34,147 +32,51 @@ export default function ItemTypeForm({
       }}
       className="space-y-4 mt-2"
     >
-      <form.AppField name="name">
-        {(field) => (
-          <div className="space-y-1">
-            <Label htmlFor={field.name} className="text-dracula-foreground">
-              Name
-            </Label>
-            <Input
-              id={field.name}
-              name={field.name}
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-              placeholder="e.g. Dairy Products"
-            />
-            {field.state.meta.errors.length > 0 && (
-              <p className="text-dracula-red text-xs">
-                {field.state.meta.errors[0]}
-              </p>
-            )}
-          </div>
-        )}
-      </form.AppField>
+      <AppFormField
+        form={form}
+        name="name"
+        label="Name"
+        placeholder="e.g. Dairy Products"
+      />
 
-      <form.AppField name="description">
-        {(field) => (
-          <div className="space-y-1">
-            <Label htmlFor={field.name} className="text-dracula-foreground">
-              Description
-            </Label>
-            <Textarea
-              id={field.name}
-              name={field.name}
-              value={field.state.value || ""}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              className="bg-dracula-current-line border-dracula-selection text-dracula-foreground resize-none"
-              placeholder="Optional description..."
-            />
-          </div>
-        )}
-      </form.AppField>
+      <AppFormField
+        form={form}
+        name="description"
+        label="Description"
+        placeholder="Optional description..."
+        isTextarea
+      />
 
       <div className="grid grid-cols-2 gap-4">
-        <form.AppField name="base_measurement_unit">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Base unit
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                placeholder="e.g. ml"
-              />
-              {field.state.meta.errors.length > 0 && (
-                <p className="text-dracula-red text-xs">
-                  {field.state.meta.errors[0]}
-                </p>
-              )}
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="base_measurement_unit"
+          label="Base unit"
+          placeholder="e.g. ml"
+        />
 
-        <form.AppField name="display_measurement_unit">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Display unit
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                placeholder="e.g. l"
-              />
-              {field.state.meta.errors.length > 0 && (
-                <p className="text-dracula-red text-xs">
-                  {field.state.meta.errors[0]}
-                </p>
-              )}
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="display_measurement_unit"
+          label="Display unit"
+          placeholder="e.g. l"
+        />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <form.AppField name="default_quantity">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Default quantity
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                placeholder="1000"
-              />
-              {field.state.meta.errors.length > 0 && (
-                <p className="text-dracula-red text-xs">
-                  {field.state.meta.errors[0]}
-                </p>
-              )}
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="default_quantity"
+          label="Default quantity"
+          placeholder="1000"
+        />
 
-        <form.AppField name="shortage_threshold">
-          {(field) => (
-            <div className="space-y-1">
-              <Label htmlFor={field.name} className="text-dracula-foreground">
-                Shortage limit
-              </Label>
-              <Input
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className="bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                placeholder="5000"
-              />
-              {field.state.meta.errors.length > 0 && (
-                <p className="text-dracula-red text-xs">
-                  {field.state.meta.errors[0]}
-                </p>
-              )}
-            </div>
-          )}
-        </form.AppField>
+        <AppFormField
+          form={form}
+          name="shortage_threshold"
+          label="Shortage limit"
+          placeholder="5000"
+        />
       </div>
 
       <div className="flex justify-end gap-3 mt-6">
@@ -189,10 +91,7 @@ export default function ItemTypeForm({
         <Button
           type="button"
           disabled={isPending}
-          onClick={() => {
-            console.log("manual submit clicked", { mode, itemTypeId });
-            form.handleSubmit();
-          }}
+          onClick={() => form.handleSubmit()}
           className="bg-dracula-purple/80 hover:bg-dracula-purple text-dracula-background font-bold"
         >
           {isPending
@@ -200,8 +99,8 @@ export default function ItemTypeForm({
               ? "Creating..."
               : "Updating..."
             : mode === "create"
-              ? "Create Type"
-              : "Save Changes"}
+              ? "Create item type"
+              : "Save changes"}
         </Button>
       </div>
     </form>

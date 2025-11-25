@@ -7,9 +7,15 @@ import type { ItemFormProps } from "~/pages/inventory/items/ItemForm";
 const itemSchema = z.object({
   item_type_id: z.coerce.number().min(1, "Item type ID is required"),
   description: z.string().optional().nullable(),
-  quantity: z.coerce.number("Must be a number"),
+  quantity: z.coerce
+    .number("Must be a number")
+    .nonnegative("Must not be negative"),
   display_measurement_unit: z.string().optional().nullable(),
-  purchase_price: z.coerce.number().optional().nullable(),
+  purchase_price: z.coerce
+    .number("Must be a number")
+    .nonnegative("Must not be negative")
+    .optional()
+    .nullable(),
   expiration_date: z.string().optional().nullable(),
 });
 
@@ -33,7 +39,7 @@ export function useItemForm({
       display_measurement_unit: initialData?.display_measurement_unit || "",
       purchase_price: initialData?.purchase_price?.toString() || "",
       expiration_date: initialData?.expiration_date
-        ? new Date(initialData.expiration_date).toISOString().split("T")[0] 
+        ? new Date(initialData.expiration_date).toISOString().split("T")[0]
         : "",
     },
     validators: {
