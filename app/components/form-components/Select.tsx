@@ -1,6 +1,6 @@
 import { useStore } from "@tanstack/react-form";
 import * as ShadcnSelect from "~/components/ui/select";
-import { ErrorMessages } from "./ErrorMessages";
+// import { ErrorMessages } from "./ErrorMessages";
 import { useFieldContext } from "~/hooks/use-app-form";
 
 export function Select({
@@ -16,7 +16,7 @@ export function Select({
   const errors = useStore(field.store, (state) => state.meta.errors);
 
   return (
-    <div>
+    <div className="mb-1">
       <ShadcnSelect.Select
         name={field.name}
         value={field.state.value}
@@ -36,7 +36,7 @@ export function Select({
           </ShadcnSelect.SelectGroup>
         </ShadcnSelect.SelectContent>
       </ShadcnSelect.Select>
-      {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
+      {/* {field.state.meta.isTouched && <ErrorMessages errors={errors} />} */}
     </div>
   );
 }

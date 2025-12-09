@@ -76,7 +76,14 @@ export function ItemTypeCardOptions({ itemType }: ItemTypeCardOptionsProps) {
               });
               return;
             }
-            deleteItemType({ id: itemType.id, force: true });
+            if (
+              confirm(
+                "Are you sure you want to delete this item type? This action cannot be undone."
+              )
+            ) {
+              deleteItemType({ id: itemType.id, force: true });
+              toast.info("Item type deleted");
+            }
           }}
           className="w-full text-left px-4 py-2 text-sm text-dracula-red hover:bg-dracula-current-line flex items-center gap-2 rounded-md"
         >

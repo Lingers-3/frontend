@@ -2,6 +2,7 @@ import { Button } from "~/components/ui/button";
 import { AppFormField } from "~/components/form-components/AppFormField";
 import type { ItemTypeFull } from "~/services/itemType/types";
 import { useItemTypeForm } from "~/hooks/use-item-type-form";
+import { Select } from "~/components/form-components/Select";
 
 export interface ItemTypeFormProps {
   mode: "create" | "update";
@@ -47,7 +48,31 @@ export default function ItemTypeForm({
         isTextarea
       />
 
-      <div className="grid grid-cols-2 gap-4">
+      <form.AppField name="base_measurement_unit">
+        {(field: any) => (
+          <>
+            <Select
+              label="Measurement unit"
+              values={[
+                { label: "Millimeter (mm)", value: "mm" },
+                { label: "Gram (g)", value: "g" },
+                { label: "Milliliter (ml)", value: "ml" },
+                { label: "Cubic millimeter (mm³)", value: "mm³" },
+                { label: "Square millimeter (mm²)", value: "mm²" },
+                { label: "Piece (pcs)", value: "pcs" },
+              ]}
+              placeholder="Select measurement unit"
+            />
+            {field.state.meta.errors.length > 0 && (
+              <p className="text-dracula-red text-xs">
+                {field.state.meta.errors[0]}
+              </p>
+            )}
+          </>
+        )}
+      </form.AppField>
+
+      {/* <div className="grid grid-cols-2 gap-4">
         <AppFormField
           form={form}
           name="base_measurement_unit"
@@ -61,9 +86,9 @@ export default function ItemTypeForm({
           label="Display unit"
           placeholder="e.g. l"
         />
-      </div>
+      </div> */}
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 mt-4">
         <AppFormField
           form={form}
           name="default_quantity"

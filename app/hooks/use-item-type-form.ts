@@ -8,7 +8,7 @@ const itemTypeSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().optional().nullable(),
   base_measurement_unit: z.string().min(1, "Base unit is required"),
-  display_measurement_unit: z.string().min(1, "Display unit is required"),
+  display_measurement_unit: z.string().optional().nullable(),
   default_quantity: z.coerce
     .number("Must be a number")
     .nonnegative("Must not be negative"),
@@ -56,7 +56,7 @@ export function useItemTypeForm({
           name: value.name,
           description: value.description || null,
           base_measurement_unit: value.base_measurement_unit,
-          display_measurement_unit: value.display_measurement_unit,
+          display_measurement_unit: value.base_measurement_unit, // Using base unit as display unit for now
           default_quantity: value.default_quantity
             ? Number(value.default_quantity)
             : null,

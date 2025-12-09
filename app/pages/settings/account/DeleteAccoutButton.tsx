@@ -44,7 +44,12 @@ export default function DeleteAccountButton() {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            onClick={auth.delete}
+            onClick={async () => {
+              const res = await auth.delete();
+              if (!res.ok) {
+                alert(`Error: ${res.error?.message || "Failed to delete account."}`);
+              }
+            }}
             className={cn(buttonVariants({ variant: "destructive" }))}
           >
             Delete account forever

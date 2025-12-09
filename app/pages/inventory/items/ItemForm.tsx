@@ -1,7 +1,7 @@
 import { Button } from "~/components/ui/button";
 import { useItemForm } from "~/hooks/use-item-form";
 import type { ItemFull } from "~/services/item/types";
-import { AppFormField } from "~/components/form-components/AppFormField"; 
+import { AppFormField } from "~/components/form-components/AppFormField";
 
 export interface ItemFormProps {
   mode: "create" | "update";
@@ -52,7 +52,7 @@ export default function ItemForm({
         isTextarea
       />
 
-      <div className="grid grid-cols-2 gap-4">
+      {/* <div className="grid grid-cols-2 gap-4">
         <AppFormField
           form={form}
           name="quantity"
@@ -66,7 +66,14 @@ export default function ItemForm({
           label="Unit"
           placeholder="e.g. pcs, kg"
         />
-      </div>
+      </div> */}
+
+      <AppFormField
+        form={form}
+        name="quantity"
+        label="Quantity"
+        placeholder="0"
+      />
 
       <div className="grid grid-cols-2 gap-4">
         <AppFormField
