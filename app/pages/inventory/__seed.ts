@@ -45,6 +45,8 @@ export const useSeedDatabase = () => {
       createTagRequest({ name: "Imported", color: formatColor("#ffb86c") })
     );
 
+    console.log(tagType1, tagType2, tagItem1, tagItem2);
+
     console.log("Creating item types...");
 
     const dairyType = await safeCall("Create type: Dairy", () =>
@@ -55,7 +57,7 @@ export const useSeedDatabase = () => {
         display_measurement_unit: "ml",
         default_quantity: 1000,
         shortage_threshold: 5000,
-        tag_ids: [tagType1?.id, tagType2?.id].filter(Boolean) as number[],
+        tag_ids: [tagType1?.id || 1, tagType2?.id || 2].filter(Boolean) as number[],
       })
     );
 
@@ -67,7 +69,7 @@ export const useSeedDatabase = () => {
         display_measurement_unit: "kg",
         default_quantity: 500,
         shortage_threshold: 10000,
-        tag_ids: [tagType1?.id].filter(Boolean) as number[],
+        tag_ids: [tagType1?.id || 1].filter(Boolean) as number[],
       })
     );
 
@@ -79,7 +81,7 @@ export const useSeedDatabase = () => {
         display_measurement_unit: "kg",
         default_quantity: 500,
         shortage_threshold: 10000,
-        tag_ids: [tagType1?.id].filter(Boolean) as number[],
+        tag_ids: [tagType1?.id || 1].filter(Boolean) as number[],
       })
     );
 
@@ -103,7 +105,7 @@ export const useSeedDatabase = () => {
           expiration_date: new Date(
             Date.now() + 2 * 24 * 60 * 60 * 1000
           ).toISOString(),
-          tag_ids: [tagItem1?.id].filter(Boolean) as number[],
+          tag_ids: [tagItem1?.id || 3].filter(Boolean) as number[],
         })
       );
     }
@@ -126,7 +128,7 @@ export const useSeedDatabase = () => {
           expiration_date: new Date(
             Date.now() + 10 * 24 * 60 * 60 * 1000
           ).toISOString(),
-          tag_ids: [tagItem2?.id].filter(Boolean) as number[],
+          tag_ids: [tagItem2?.id || 4].filter(Boolean) as number[],
         })
       );
     }
