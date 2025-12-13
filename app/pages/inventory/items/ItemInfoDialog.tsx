@@ -9,6 +9,7 @@ import {
   AlertTriangle,
   Scale,
   X,
+  Plus,
 } from "lucide-react";
 import {
   Dialog,
@@ -20,6 +21,7 @@ import {
 import type { ItemFull } from "~/services/item/types";
 import ItemDialog from "./ItemDialog";
 import { useDeleteItem, useUpdateItem } from "~/hooks/inventory-hooks";
+import TagDialog from "../tags/TagDialog";
 
 interface ItemInfoDialogProps {
   item: ItemFull;
@@ -168,24 +170,42 @@ export const ItemInfoDialog = ({
                       borderWidth: "2px",
                     }}
                   >
-                    {tag.name}
-                    <X
-                      size={15}
-                      className="cursor-pointer ml-2"
-                      onClick={() => {
-                        update({
-                          id: item.id,
-                          payload: {
-                            ...item,
-                            tag_ids: item.tags
-                              .filter((_tag) => _tag.id != tag.id)
-                              .map((tag) => tag.id),
-                          },
-                        });
-                      }}
+                    <TagDialog
+                      tag={tag}
+                      mode="update"
+                      trigger={
+                        <div className="cursor-pointer m-0 p-0 flex">
+                          {tag.name}
+                          <X
+                            size={15}
+                            className="cursor-pointer ml-2"
+                            onClick={() => {
+                              update({
+                                id: item.id,
+                                payload: {
+                                  ...item,
+                                  tag_ids: item.tags
+                                    .filter((_tag) => _tag.id != tag.id)
+                                    .map((tag) => tag.id),
+                                },
+                              });
+                            }}
+                          />
+                        </div>
+                      }
                     />
                   </span>
                 ))}
+                <TagDialog
+                  mode="create"
+                  targetId={item.id}
+                  targetType="item"
+                  trigger={
+                    <span className="cursor-pointer inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-medium bg-dracula-background border border-dracula-selection hover:border-amber-200 duration-200 transition-all">
+                      <Plus size={15} />
+                    </span>
+                  }
+                />
               </div>
             </div>
           )}

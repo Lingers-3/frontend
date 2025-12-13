@@ -147,8 +147,8 @@ export const useCreateTag = () => {
     mutationFn: (payload: TagCreate) => unwrap(tag.create(payload)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.tags.root });
-      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.items.root });
-      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.itemTypes.root });
+      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.items.full });
+      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.itemTypes.full });
     },
   });
 };
@@ -161,8 +161,8 @@ export const useUpdateTag = () => {
       unwrap(tag.update(id, payload)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.tags.root });
-      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.items.root });
-      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.itemTypes.root });
+      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.items.full });
+      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.itemTypes.full });
     },
   });
 };
@@ -174,8 +174,8 @@ export const useDeleteTag = () => {
     mutationFn: (id: number) => unwrap(tag.delete(id)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.tags.root });
-      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.items.root });
-      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.itemTypes.root });
+      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.items.full });
+      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.itemTypes.full });
     },
   });
 };

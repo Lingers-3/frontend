@@ -1,6 +1,7 @@
 import { Plus, TagIcon, X } from "lucide-react";
 import { useUpdateItemType } from "~/hooks/inventory-hooks";
 import type { ItemTypeFull } from "~/services/itemType/types";
+import TagDialog from "../../tags/TagDialog";
 
 interface ItemTypeInfoTagsProps {
   type: ItemTypeFull;
@@ -28,27 +29,42 @@ export function ItemTypeInfoTags({ type }: ItemTypeInfoTagsProps) {
               borderWidth: "2px",
             }}
           >
-            {tag.name}
-            <X
-              size={15}
-              className="cursor-pointer ml-2"
-              onClick={() => {
-                update({
-                  id: type.id,
-                  payload: {
-                    ...type,
-                    tag_ids: type.tags
-                      .filter((_tag) => _tag.id != tag.id)
-                      .map((tag) => tag.id),
-                  },
-                });
-              }}
+            <TagDialog
+              tag={tag}
+              mode="update"
+              trigger={
+                <div className="cursor-pointer m-0 p-0 flex">
+                  {tag.name}
+                  <X
+                    size={15}
+                    className="cursor-pointer ml-2"
+                    onClick={() => {
+                      update({
+                        id: type.id,
+                        payload: {
+                          ...type,
+                          tag_ids: type.tags
+                            .filter((_tag) => _tag.id != tag.id)
+                            .map((tag) => tag.id),
+                        },
+                      });
+                    }}
+                  />
+                </div>
+              }
             />
           </span>
         ))}
-        <span className="cursor-pointer inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-medium bg-dracula-background border border-dracula-selection hover:border-amber-200 duration-200 transition-all">
-          <Plus size={15} />
-        </span>
+        <TagDialog
+          mode="create"
+          targetId={type.id}
+          targetType="item_type"
+          trigger={
+            <span className="cursor-pointer inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-medium bg-dracula-background border border-dracula-selection hover:border-amber-200 duration-200 transition-all">
+              <Plus size={15} />
+            </span>
+          }
+        />
       </div>
     </div>
   );
