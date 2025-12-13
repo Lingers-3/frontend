@@ -33,25 +33,23 @@ export function ItemTypeInfoTags({ type }: ItemTypeInfoTagsProps) {
               tag={tag}
               mode="update"
               trigger={
-                <div className="cursor-pointer m-0 p-0 flex">
-                  {tag.name}
-                  <X
-                    size={15}
-                    className="cursor-pointer ml-2"
-                    onClick={() => {
-                      update({
-                        id: type.id,
-                        payload: {
-                          ...type,
-                          tag_ids: type.tags
-                            .filter((_tag) => _tag.id != tag.id)
-                            .map((tag) => tag.id),
-                        },
-                      });
-                    }}
-                  />
-                </div>
+                <div className="cursor-pointer m-0 p-0 flex">{tag.name}</div>
               }
+            />
+            <X
+              size={15}
+              className="cursor-pointer ml-2"
+              onClick={() => {
+                update({
+                  id: type.id,
+                  payload: {
+                    ...type,
+                    tag_ids: type.tags
+                      .filter((_tag) => _tag.id != tag.id)
+                      .map((tag) => tag.id),
+                  },
+                });
+              }}
             />
           </span>
         ))}
@@ -59,6 +57,7 @@ export function ItemTypeInfoTags({ type }: ItemTypeInfoTagsProps) {
           mode="create"
           targetId={type.id}
           targetType="item_type"
+          currentTagIds={type.tags ? type.tags.map((t) => t.id) : []}
           trigger={
             <span className="cursor-pointer inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-medium bg-dracula-background border border-dracula-selection hover:border-amber-200 duration-200 transition-all">
               <Plus size={15} />

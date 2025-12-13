@@ -56,6 +56,7 @@ export const useUpdateItemType = () => {
       unwrap(itemType.update(id, payload)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.itemTypes.root });
+      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.tags.root });
     },
   });
 };
@@ -116,6 +117,7 @@ export const useUpdateItem = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.items.root });
       queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.itemTypes.root });
+      queryClient.invalidateQueries({ queryKey: INVENTORY_KEYS.tags.root });
     },
   });
 };

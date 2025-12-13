@@ -176,23 +176,23 @@ export const ItemInfoDialog = ({
                       trigger={
                         <div className="cursor-pointer m-0 p-0 flex">
                           {tag.name}
-                          <X
-                            size={15}
-                            className="cursor-pointer ml-2"
-                            onClick={() => {
-                              update({
-                                id: item.id,
-                                payload: {
-                                  ...item,
-                                  tag_ids: item.tags
-                                    .filter((_tag) => _tag.id != tag.id)
-                                    .map((tag) => tag.id),
-                                },
-                              });
-                            }}
-                          />
                         </div>
                       }
+                    />
+                    <X
+                      size={15}
+                      className="cursor-pointer ml-2"
+                      onClick={() => {
+                        update({
+                          id: item.id,
+                          payload: {
+                            ...item,
+                            tag_ids: item.tags
+                              .filter((_tag) => _tag.id != tag.id)
+                              .map((tag) => tag.id),
+                          },
+                        });
+                      }}
                     />
                   </span>
                 ))}
@@ -200,6 +200,7 @@ export const ItemInfoDialog = ({
                   mode="create"
                   targetId={item.id}
                   targetType="item"
+                  currentTagIds={item.tags ? item.tags.map((t) => t.id) : []}
                   trigger={
                     <span className="cursor-pointer inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-medium bg-dracula-background border border-dracula-selection hover:border-amber-200 duration-200 transition-all">
                       <Plus size={15} />

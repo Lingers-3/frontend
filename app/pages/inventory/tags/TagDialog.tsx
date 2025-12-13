@@ -10,6 +10,8 @@ import {
 } from "~/components/ui/dialog";
 import type { TagShort } from "~/services/tag/types";
 import TagForm from "./TagForm";
+import { TagExistingSelect } from "./TagExistingSelect";
+import { cn } from "~/lib/utils";
 
 type TagDialogProps =
   | {
@@ -18,6 +20,7 @@ type TagDialogProps =
       trigger: React.ReactNode;
       targetId?: number;
       targetType?: "item" | "item_type";
+      currentTagIds?: number[];
     }
   | {
       mode: "update";
@@ -25,6 +28,7 @@ type TagDialogProps =
       trigger: React.ReactNode;
       targetId?: never;
       targetType?: never;
+      currentTagIds?: never;
     };
 
 export default function TagDialog({
@@ -33,11 +37,22 @@ export default function TagDialog({
   trigger,
   targetId,
   targetType,
+  currentTagIds = [],
 }: TagDialogProps) {
   const [open, setOpen] = useState(false);
 
+  const [tab, setTab] = useState<"new" | "existing">("existing");
+
+  const showToggle = mode === "create" && !!targetId;
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(val) => {
+        setOpen(val);
+        if (!val) setTab("existing");
+      }}
+    >
       <DialogTrigger asChild>{trigger}</DialogTrigger>
 
       <DialogContent
@@ -55,25 +70,70 @@ export default function TagDialog({
             </div>
             <div>
               <DialogTitle className="text-dracula-foreground text-xl">
-                {mode === "create" ? "Create tag" : "Edit tag"}
+                {mode === "create" ? "Add tag" : "Edit tag"}
               </DialogTitle>
               <DialogDescription className="text-dracula-comment">
                 {mode === "create"
-                  ? `Create a new tag on this ${targetType === "item" ? "item" : "item type"}.`
-                  : "Update the details of this tag (this will update the tag everywhere)."}
+                  ? `Attach a tag to this ${targetType === "item" ? "item" : "item type"}.`
+                  : "Update the details of this tag globally."}
               </DialogDescription>
             </div>
           </div>
         </DialogHeader>
 
-        <TagForm
-          mode={mode}
-          tagId={tagData?.id}
-          initialData={mode === "update" ? tagData : undefined}
-          targetId={targetId}
-          targetType={targetType}
-          onClose={() => setOpen(false)}
-        />
+        {showToggle && (
+          <div className="relative flex h-10 w-full items-center rounded-lg bg-dracula-current-line p-1 mb-2">
+            <div
+              className={cn(
+                "absolute h-8 w-[calc(50%-4px)] rounded-md bg-dracula-background shadow-sm transition-all duration-300 ease-in-out",
+                tab === "existing" ? "left-1" : "left-[calc(50%+2px)]"
+              )}
+            />
+
+            <button
+              onClick={() => setTab("existing")}
+              className={cn(
+                "relative z-10 flex-1 text-center text-sm transition-colors duration-200",
+                tab === "existing"
+                  ? "text-dracula-foreground font-medium"
+                  : "text-dracula-comment hover:text-dracula-foreground/80"
+              )}
+            >
+              Select existing
+            </button>
+
+            <button
+              onClick={() => setTab("new")}
+              className={cn(
+                "relative z-10 flex-1 text-center text-sm transition-colors duration-200",
+                tab === "new"
+                  ? "text-dracula-foreground font-medium"
+                  : "text-dracula-comment hover:text-dracula-foreground/80"
+              )}
+            >
+              Create new
+            </button>
+          </div>
+        )}
+
+        {mode === "update" ||
+        (mode === "create" && (!showToggle || tab === "new")) ? (
+          <TagForm
+            mode={mode}
+            tagId={tagData?.id}
+            initialData={mode === "update" ? tagData : undefined}
+            targetId={targetId}
+            targetType={targetType}
+            onClose={() => setOpen(false)}
+          />
+        ) : (
+          <TagExistingSelect
+            targetId={targetId!}
+            targetType={targetType!}
+            currentTagIds={currentTagIds}
+            onClose={() => setOpen(false)}
+          />
+        )}
       </DialogContent>
     </Dialog>
   );
