@@ -28,7 +28,7 @@ export default function ItemsIndex() {
   return (
     <Empty className="flex-1">
       <EmptyHeader>
-        <EmptyTitle>Items grid page is under development.</EmptyTitle>
+        <EmptyTitle>Items page is under development.</EmptyTitle>
         <EmptyDescription>
           The page you&apos;re looking for is currently under development. Try
           searching for what you need below.

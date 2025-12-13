@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   Package,
   CalendarClock,
@@ -8,6 +8,7 @@ import {
   Trash2,
   AlertTriangle,
   Scale,
+  X,
 } from "lucide-react";
 import {
   Dialog,
@@ -18,7 +19,7 @@ import {
 } from "~/components/ui/dialog";
 import type { ItemFull } from "~/services/item/types";
 import ItemDialog from "./ItemDialog";
-import { useDeleteItem } from "~/hooks/inventory-hooks";
+import { useDeleteItem, useUpdateItem } from "~/hooks/inventory-hooks";
 
 interface ItemInfoDialogProps {
   item: ItemFull;
@@ -32,6 +33,7 @@ export const ItemInfoDialog = ({
   onOpenChange,
 }: ItemInfoDialogProps) => {
   const { mutate: deleteItem, isPending } = useDeleteItem();
+  const { mutate: update } = useUpdateItem();
 
   const isExpiringSoon = useMemo(() => {
     if (!item.expiration_date) return false;
@@ -121,7 +123,7 @@ export const ItemInfoDialog = ({
                   Purchase price
                 </div>
                 <div className="text-lg font-bold text-dracula-green font-mono">
-                  ${(item.purchase_price?.toFixed(2) ?? '0.00')}
+                  ${item.purchase_price?.toFixed(2) ?? "0.00"}
                 </div>
               </div>
             )}
@@ -147,7 +149,7 @@ export const ItemInfoDialog = ({
             )}
           </div>
 
-          {item.tags && item.tags.length > 0 && (
+          {item.tags && (
             <div>
               <div className="text-sm text-dracula-comment mb-2 flex items-center gap-1.5">
                 <TagIcon className="w-3 h-3" />
@@ -167,6 +169,21 @@ export const ItemInfoDialog = ({
                     }}
                   >
                     {tag.name}
+                    <X
+                      size={15}
+                      className="cursor-pointer ml-2"
+                      onClick={() => {
+                        update({
+                          id: item.id,
+                          payload: {
+                            ...item,
+                            tag_ids: item.tags
+                              .filter((_tag) => _tag.id != tag.id)
+                              .map((tag) => tag.id),
+                          },
+                        });
+                      }}
+                    />
                   </span>
                 ))}
               </div>

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useParams, Link } from "react-router";
 import { AlertTriangle, ArrowLeft } from "lucide-react";
 import { useItemTypesFull } from "~/hooks/inventory-hooks";
-import { ItemTypeInfo } from "./ItemTypeInfo";
+import { ItemTypeInfo } from "./item-type-info";
 import { ItemTypeItemsGrid } from "./ItemTypeItemsGrid";
 
 export default function ItemTypePage() {
