@@ -17,6 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogOverlay,
 } from "~/components/ui/dialog";
 import type { ItemFull } from "~/services/item/types";
 import ItemDialog from "./ItemDialog";
@@ -55,6 +56,7 @@ export const ItemInfoDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" /> 
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         className="rounded-2xl bg-dracula-background border-dracula-selection max-w-md"

@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogOverlay,
 } from "~/components/ui/dialog";
 import ItemForm from "./ItemForm";
 import type { ItemFull } from "~/services/item/types";
@@ -36,7 +37,7 @@ export default function ItemDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-
+      <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg"

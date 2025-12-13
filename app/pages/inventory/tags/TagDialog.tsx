@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogOverlay,
 } from "~/components/ui/dialog";
 import type { TagShort } from "~/services/tag/types";
 import TagForm from "./TagForm";
@@ -54,7 +55,9 @@ export default function TagDialog({
       }}
     >
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-
+      {targetType == "item_type" && (
+        <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
+      )}
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         className="rounded-2xl bg-dracula-background border-dracula-selection max-w-md"

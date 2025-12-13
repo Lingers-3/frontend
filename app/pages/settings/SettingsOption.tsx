@@ -75,6 +75,7 @@ export default function SettingsOption({
           <ChevronRight className="h-5 w-5 text-dracula-text-secondary" />
         </button>
       </DialogTrigger>
+      <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" /> 
       <DialogContent className="rounded-2xl bg-dracula-background border-dracula-current-line">
         <DialogHeader>
           <DialogTitle className="text-dracula-text-primary">
