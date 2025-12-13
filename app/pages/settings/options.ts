@@ -4,10 +4,12 @@ import {
   Shield,
   Palette,
   HelpCircle,
+  Tag,
 } from "lucide-react";
 
 export const settingsOptions = [
   { icon: UserIcon, label: "Account", description: "Manage your account" },
+  { icon: Tag, label: "Tags management", description: "Manage your tags" },
   { icon: Bell, label: "Notifications", description: "Configure alerts" },
   {
     icon: Shield,
