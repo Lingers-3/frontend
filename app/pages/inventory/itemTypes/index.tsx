@@ -1,14 +1,46 @@
 import { Link } from "react-router";
+import { useState } from "react";
 import { useItemTypesFull } from "~/hooks/inventory-hooks";
 import { ItemTypeCard } from "./ItemTypeCard";
 import { Button } from "~/components/ui/button";
 import ItemTypeDialog from "~/pages/inventory/itemTypes/ItemTypeDialog";
 import { useSeedDatabase } from "../__seed";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Search } from "lucide-react";
+import { ItemTypesFilter, type FilterState } from "./ItemTypesFilter";
 
 export default function ItemTypesIndex() {
   const { data: itemTypes, isLoading, isError } = useItemTypesFull();
   const { seed } = useSeedDatabase();
+
+  const [filterState, setFilterState] = useState<FilterState>({
+    search: "",
+    sort: "asc",
+    tagIds: [],
+  });
+
+  const filteredTypes = itemTypes?.filter((type) => {
+    if (
+      filterState.search &&
+      !type.name.toLowerCase().includes(filterState.search.toLowerCase())
+    ) {
+      return false;
+    }
+
+    if (filterState.tagIds.length > 0) {
+      const typeTagIds = type.tags.map((t) => t.id);
+      const hasMatchingTag = filterState.tagIds.some((id) =>
+        typeTagIds.includes(id)
+      );
+      if (!hasMatchingTag) return false;
+    }
+
+    return true;
+  });
+
+  const sortedTypes = filteredTypes?.sort((a, b) => {
+    const compare = a.name.localeCompare(b.name);
+    return filterState.sort === "asc" ? compare : -compare;
+  });
 
   const NoItemTypes = () => (
     <div className="flex flex-col items-center justify-center h-full min-h-[70vh] w-full p-8 rounded-xl border-2 border-dashed border-dracula-current-line/50 bg-dracula-current-line/20">
@@ -42,18 +74,21 @@ export default function ItemTypesIndex() {
 
   const ItemTypesList = () => (
     <>
-      <header className="flex justify-between w-full mb-6">
+      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full mb-6 gap-4">
         <div className="flex items-center gap-4 text-dracula-foreground">
           <h1 className="ml-1 text-2xl font-bold">Item types</h1>
           <div className="text-dracula-current-line select-none">|</div>
           <p className="text-lg text-dracula-orange font-medium">
-            {itemTypes?.length ?? 0} Total
+            {sortedTypes?.length}
+            <span className="text-dracula-comment text-sm ml-1">
+              / {itemTypes?.length} Total
+            </span>
           </p>
         </div>
         <ItemTypeDialog
           mode="create"
           trigger={
-            <Button className="bg-dracula-purple hover:bg-dracula-purple/90 text-dracula-background font-bold shadow-md gap-2 rounded-xl">
+            <Button className="bg-dracula-purple hover:bg-dracula-purple/90 text-dracula-background font-bold shadow-md gap-2 rounded-xl w-full sm:w-auto">
               <PlusCircle className="w-5 h-5" />
               Add item type
             </Button>
@@ -61,13 +96,31 @@ export default function ItemTypesIndex() {
         />
       </header>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {itemTypes?.map((type) => (
-          <Link key={type.id} to={`${type.id}`} className="block">
-            <ItemTypeCard itemType={type} />
-          </Link>
-        ))}
-      </div>
+      <ItemTypesFilter state={filterState} onChange={setFilterState} />
+
+      {sortedTypes?.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-12 text-dracula-comment">
+          <Search className="w-10 h-10 mb-2 opacity-50" />
+          <p>No item types match your filters.</p>
+          <Button
+            variant="link"
+            onClick={() =>
+              setFilterState({ search: "", sort: "asc", tagIds: [] })
+            }
+            className="text-dracula-purple mt-2"
+          >
+            Clear filters
+          </Button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {sortedTypes?.map((type) => (
+            <Link key={type.id} to={`${type.id}`} className="block">
+              <ItemTypeCard itemType={type} />
+            </Link>
+          ))}
+        </div>
+      )}
     </>
   );
 
