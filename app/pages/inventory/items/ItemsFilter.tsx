@@ -139,7 +139,10 @@ export function ItemsFilter({ state, onChange }: ItemsFilterProps) {
 
       <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
 
-      <DialogContent className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg">
+      <DialogContent
+        onOpenAutoFocus={(e) => e.preventDefault()}
+        className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg"
+      >
         <DialogHeader>
           <DialogTitle className="text-dracula-foreground">
             Filter & Sort Items
@@ -158,7 +161,6 @@ export function ItemsFilter({ state, onChange }: ItemsFilterProps) {
                 value={internalState.search}
                 onChange={(e) => updateSearch(e.target.value)}
                 className="pl-9 h-10 bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                autoFocus
               />
               {internalState.search && (
                 <X

@@ -87,7 +87,7 @@ export function TagExistingSelect({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="pl-9 bg-dracula-current-line border-dracula-selection text-dracula-foreground placeholder:text-dracula-comment focus-visible:ring-dracula-purple"
-          autoFocus
+          autoFocus={false}
         />
       </div>
 

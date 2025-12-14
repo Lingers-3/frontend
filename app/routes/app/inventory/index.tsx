@@ -19,7 +19,7 @@ export default function InventoryLayout() {
 
   return (
     <div className="bg-dracula-background h-screen flex flex-col"> 
-      <div className="p-7 pb-0 flex flex-col items-center justify-center flex-shrink-0"> 
+      <div className="p-7 flex flex-col items-center justify-center flex-shrink-0"> 
         <div className="flex w-full justify-between">
           <AppSidebarTrigger />
           <ViewModeSwitch />

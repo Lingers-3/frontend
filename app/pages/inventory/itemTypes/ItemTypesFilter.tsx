@@ -21,7 +21,7 @@ export interface FilterState {
 }
 
 interface ItemTypesFilterProps {
-  state: FilterState; 
+  state: FilterState;
   onChange: (newState: FilterState) => void;
 }
 
@@ -59,7 +59,7 @@ export function ItemTypesFilter({ state, onChange }: ItemTypesFilterProps) {
 
   const resetFilters = () => {
     const emptyState: FilterState = { search: "", sort: "asc", tagIds: [] };
-    setInternalState(emptyState); 
+    setInternalState(emptyState);
     onChange(emptyState);
     setOpen(false);
   };
@@ -121,7 +121,10 @@ export function ItemTypesFilter({ state, onChange }: ItemTypesFilterProps) {
 
       <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
 
-      <DialogContent className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg">
+      <DialogContent
+        onOpenAutoFocus={(e) => e.preventDefault()}
+        className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg"
+      >
         <DialogHeader>
           <DialogTitle className="text-dracula-foreground">
             Filter & Sort
@@ -140,7 +143,6 @@ export function ItemTypesFilter({ state, onChange }: ItemTypesFilterProps) {
                 value={internalState.search}
                 onChange={(e) => updateSearch(e.target.value)}
                 className="pl-9 h-10 bg-dracula-current-line border-dracula-selection text-dracula-foreground"
-                autoFocus
               />
               {internalState.search && (
                 <X

@@ -66,7 +66,7 @@ export default function TagDialog({
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-dracula-current-line rounded-full">
               {mode === "create" ? (
-                <Tag className="h-6 w-6 text-dracula-pink" />
+                <Tag className="h-6 w-6 text-dracula-cyan" />
               ) : (
                 <Edit className="h-6 w-6 text-dracula-cyan" />
               )}
@@ -96,7 +96,7 @@ export default function TagDialog({
             <button
               onClick={() => setTab("existing")}
               className={cn(
-                "relative z-10 flex-1 text-center text-sm transition-colors duration-200",
+                "cursor-pointer relative z-10 flex-1 text-center text-sm transition-colors duration-200",
                 tab === "existing"
                   ? "text-dracula-foreground font-medium"
                   : "text-dracula-comment hover:text-dracula-foreground/80"
@@ -108,7 +108,7 @@ export default function TagDialog({
             <button
               onClick={() => setTab("new")}
               className={cn(
-                "relative z-10 flex-1 text-center text-sm transition-colors duration-200",
+                "cursor-pointer relative z-10 flex-1 text-center text-sm transition-colors duration-200",
                 tab === "new"
                   ? "text-dracula-foreground font-medium"
                   : "text-dracula-comment hover:text-dracula-foreground/80"

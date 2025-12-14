@@ -6,7 +6,11 @@ import type { TagFormProps } from "~/pages/inventory/tags/TagForm";
 
 const tagSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  color: z.string().optional().nullable(),
+  color: z
+    .string()
+    .regex(/^#[0-9A-Fa-f]{6}$/, "Invalid RGB hex color")
+    .optional()
+    .nullable(),
 });
 
 export function useTagForm({

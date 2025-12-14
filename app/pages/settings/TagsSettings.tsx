@@ -11,7 +11,7 @@ export function TagsSettings() {
   const { data: tags, isLoading } = useTags();
   const { mutate: deleteTag, isPending: isDeleting } = useDeleteTag();
 
-  const [view, setView] = useState<"types" | "items">("types");
+  const [view, setView] = useState<"item_type" | "item">("item_type");
   const [searchQuery, setSearchQuery] = useState("");
 
   if (isLoading) {
@@ -30,7 +30,7 @@ export function TagsSettings() {
 
       if (isOrphan) return true;
 
-      if (view === "items") {
+      if (view === "item") {
         return tag.item_ids && tag.item_ids.length > 0;
       } else {
         return tag.item_type_ids && tag.item_type_ids.length > 0;
@@ -47,14 +47,14 @@ export function TagsSettings() {
         <div
           className={cn(
             "absolute h-8 w-[calc(50%-4px)] rounded-md bg-dracula-background shadow-sm transition-all duration-300 ease-in-out",
-            view === "types" ? "left-1" : "left-[calc(50%+2px)]"
+            view === "item_type" ? "left-1" : "left-[calc(50%+2px)]"
           )}
         />
         <button
-          onClick={() => setView("types")}
+          onClick={() => setView("item_type")}
           className={cn(
-            "relative z-10 flex-1 text-center text-sm transition-colors duration-200",
-            view === "types"
+            "cursor-pointer relative z-10 flex-1 text-center text-sm transition-colors duration-200",
+            view === "item_type"
               ? "text-dracula-foreground font-medium"
               : "text-dracula-comment hover:text-dracula-foreground/80"
           )}
@@ -62,10 +62,10 @@ export function TagsSettings() {
           Types tags
         </button>
         <button
-          onClick={() => setView("items")}
+          onClick={() => setView("item")}
           className={cn(
-            "relative z-10 flex-1 text-center text-sm transition-colors duration-200",
-            view === "items"
+            "cursor-pointer relative z-10 flex-1 text-center text-sm transition-colors duration-200",
+            view === "item"
               ? "text-dracula-foreground font-medium"
               : "text-dracula-comment hover:text-dracula-foreground/80"
           )}
@@ -87,6 +87,7 @@ export function TagsSettings() {
 
         <TagDialog
           mode="create"
+          targetType={view}
           trigger={
             <Button
               size="icon"
@@ -119,8 +120,12 @@ export function TagsSettings() {
                     {tag.name}
                   </span>
                   <span className="text-[10px] text-dracula-comment">
-                    Used in: {tag.item_ids?.length || 0} items,{" "}
-                    {tag.item_type_ids?.length || 0} types
+                    {tag.item_ids?.length === 0 ||
+                      (tag.item_ids !== undefined &&
+                        `Used in: ${tag.item_ids?.length || 0} items.`)}
+                    {tag.item_type_ids?.length === 0 ||
+                      (tag.item_type_ids !== undefined &&
+                        `Used in: ${tag.item_type_ids?.length || 0} types.`)}
                   </span>
                 </div>
               </div>

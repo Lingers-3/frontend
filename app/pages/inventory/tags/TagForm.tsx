@@ -45,7 +45,7 @@ export default function TagForm({
         placeholder="e.g. Expired, Urgent, Freezer"
       />
 
-      <div className="flex gap-4 items-end">
+      <div className="flex gap-4 items-start">
         <div className="flex-1">
           <AppFormField
             form={form}
@@ -57,13 +57,13 @@ export default function TagForm({
         
         <form.AppField name="color">
           {(field: any) => (
-            <div className="flex flex-col gap-1.5 mb-1">
+            <div className="flex flex-col">
               <label className="text-sm font-medium text-dracula-foreground">
                 Picker
               </label>
               <input 
                 type="color"
-                className="h-10 w-14 p-1 rounded bg-dracula-current-line border border-dracula-selection cursor-pointer"
+                className="h-10 w-14 p-1 rounded bg-dracula-current-line cursor-pointer"
                 value={field.state.value || "#ffffff"}
                 onChange={(e) => field.handleChange(e.target.value)}
               />
@@ -85,7 +85,7 @@ export default function TagForm({
           type="button"
           disabled={isPending}
           onClick={() => form.handleSubmit()}
-          className="bg-dracula-pink/80 hover:bg-dracula-pink text-dracula-background font-bold"
+          className="bg-dracula-purple/80 hover:bg-dracula-purple text-dracula-background font-bold"
         >
           {isPending
             ? mode === "create"
