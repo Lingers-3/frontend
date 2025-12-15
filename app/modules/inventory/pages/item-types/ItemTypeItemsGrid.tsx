@@ -64,7 +64,7 @@ export function ItemTypeItemsGrid({ parsedId, type }: ItemTypeItemsGridProps) {
 
   return (
     <main className="w-full mb-40">
-      <div className="mb-6 flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-semibold flex items-center gap-2">
             Items
