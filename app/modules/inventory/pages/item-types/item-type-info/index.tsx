@@ -24,7 +24,7 @@ export function ItemTypeInfo({ type }: ItemTypeInfoProps) {
         relative="path"
         className="inline-flex items-center gap-1 text-lg text-dracula-comment hover:text-dracula-cyan mb-7 transition-colors"
       >
-        <ArrowLeft className="w-4 h-4" /> Back to types
+        <ArrowLeft className="w-4 h-4" /> Back to item types
       </Link>
 
       <div className="bg-dracula-foreground/10 rounded-2xl border border-dracula-selection p-6 space-y-6">

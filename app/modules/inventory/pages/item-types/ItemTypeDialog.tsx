@@ -29,7 +29,6 @@ export default function ItemTypeDialog({
       {mode === "create" && (
         <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
       )}
-      <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg"

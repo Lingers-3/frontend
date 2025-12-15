@@ -37,11 +37,9 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
 
   const income = isPlanning ? project.planned_income : project.actual_income;
 
-  const NS_PER_HOUR = 3600 * 1000 * 1000 * 1000
-  const time = (isPlanning
-    ? project.planned_work_time
-    : project.actual_work_time)
-    / NS_PER_HOUR;
+  const time =
+    (isPlanning ? project.planned_work_time : project.actual_work_time) /
+    (3600 * 1000 * 1000 * 1000);
 
   const deadline = isPlanning
     ? project.planned_deadline

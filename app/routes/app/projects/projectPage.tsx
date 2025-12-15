@@ -1,4 +1,4 @@
-import { ProjectPage } from "~/modules/projects/pages/project-page";
+import ProjectPage from "~/modules/projects/pages/project-page";
 import type { Route } from "./+types/projectPage";
 
 export function meta({}: Route.MetaArgs) {
