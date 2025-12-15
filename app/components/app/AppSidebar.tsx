@@ -20,7 +20,7 @@ export function AppSidebar() {
     const location = useLocation();
 
   const menuItems = [
-    { name: "Inventory", path: "/inventory/types", icon: <Drill /> },
+    { name: "Inventory", path: "/inventory/item-types", icon: <Drill /> },
     { name: "Projects", path: "/projects", icon: <FolderPen /> },
     { name: "Templates", path: "/templates", icon: <LayoutTemplate /> },
   ];
@@ -53,7 +53,7 @@ export function AppSidebar() {
                     key={item.name}
                     className={({ isActive }) => {
                       const active =
-                        item.path === "/inventory/types"
+                        item.path === "/inventory/item-types"
                           ? location.pathname.startsWith("/inventory")
                           : isActive;
 

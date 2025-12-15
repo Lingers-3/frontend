@@ -2,7 +2,7 @@ import { useStore } from "@tanstack/react-form";
 import { Label } from "../ui/label";
 import { Textarea as ShadcnTextarea } from "../ui/textarea";
 import { ErrorMessages } from "./ErrorMessages";
-import { useFieldContext } from "~/hooks/use-app-form";
+import { useFieldContext } from "~/modules/inventory/hooks/use-app-form";
 
 export function TextArea({
   label,

@@ -1,4 +1,4 @@
-import ItemsIndex from "~/pages/inventory/items";
+import ItemsIndex from "~/modules/inventory/pages/items";
 import type { Route } from "./+types";
 
 export function meta({}: Route.MetaArgs) {

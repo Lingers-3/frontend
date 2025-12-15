@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { AppSidebarTrigger } from "~/components/app/AppSidebar";
 import ToggleThemeButton from "~/components/primitives/ToggleThemeButton";
-import { ViewModeSwitch } from "~/pages/inventory/ViewModeSwitch";
+import { ViewModeSwitch } from "~/modules/inventory/pages/ViewModeSwitch";
 import type { Route } from "./items/+types";
 
 export function meta({}: Route.MetaArgs) {
@@ -14,7 +14,7 @@ export default function InventoryLayout() {
   const loc = useLocation();
 
   useEffect(() => {
-    if (loc.pathname === "/inventory") nav("types", { replace: true });
+    if (loc.pathname === "/inventory") nav("item-types", { replace: true });
   }, [loc.pathname, nav]);
 
   return (

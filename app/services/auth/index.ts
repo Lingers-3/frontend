@@ -24,7 +24,7 @@ export class auth {
   }
 
   static login() {
-    const redirectUri = `${window.location.origin}/inventory/types`;
+    const redirectUri = `${window.location.origin}/inventory/item-types`;
     window.location.href = `${import.meta.env.VITE_BASE_API_URL}/auth/login?redirect_uri=${encodeURIComponent(redirectUri)}`;
   }
 

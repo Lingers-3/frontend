@@ -2,10 +2,10 @@ import { Loader2, Plus, Search, Tag as TagIcon, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { useDeleteTag, useTags } from "~/hooks/inventory-hooks";
+import { useDeleteTag, useTags } from "~/modules/inventory/hooks/inventory-hooks";
 import { cn } from "~/lib/utils";
-import type { Tag } from "~/services/tag/types";
-import TagDialog from "../inventory/tags/TagDialog";
+import type { Tag } from "~/modules/inventory/services/tag/types";
+import TagDialog from "../../modules/inventory/pages/tags/TagDialog";
 
 export function TagsSettings() {
   const { data: tags, isLoading } = useTags();

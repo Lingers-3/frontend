@@ -1,5 +1,5 @@
 import { Button } from "~/components/ui/button";
-import { useFormContext } from "~/hooks/use-app-form";
+import { useFormContext } from "~/modules/inventory/hooks/use-app-form";
 
 export function SubscribeButton({
   label,

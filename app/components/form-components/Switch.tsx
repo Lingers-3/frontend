@@ -2,7 +2,7 @@ import { useStore } from "@tanstack/react-form";
 import { Switch as ShadcnSwitch } from "~/components/ui/switch";
 import { Label } from "../ui/label";
 import { ErrorMessages } from "./ErrorMessages";
-import { useFieldContext } from "~/hooks/use-app-form";
+import { useFieldContext } from "~/modules/inventory/hooks/use-app-form";
 
 export function Switch({ label }: { label: string }) {
   const field = useFieldContext<boolean>();

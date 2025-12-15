@@ -5,9 +5,9 @@ export default [
 
   route("", "routes/app/index.tsx", { id: "app" }, [
     route("inventory", "./routes/app/inventory/index.tsx", [
-      route("types", "./routes/app/inventory/itemTypes/layout.tsx", [
-        index("./routes/app/inventory/itemTypes/index.tsx"),
-        route(":itemTypeId", "./routes/app/inventory/itemTypes/itemTypePage.tsx"),
+      route("item-types", "./routes/app/inventory/item-types/layout.tsx", [
+        index("./routes/app/inventory/item-types/index.tsx"),
+        route(":itemTypeId", "./routes/app/inventory/item-types/itemTypePage.tsx"),
       ]),
       route("items", "./routes/app/inventory/items/layout.tsx", [
         index("./routes/app/inventory/items/index.tsx"),
