@@ -32,7 +32,7 @@ export function ItemTypeItemsGrid({ parsedId, type }: ItemTypeItemsGridProps) {
 
     if (filterState.tagIds.length > 0) {
       const itemTagIds = item.tags.map((t) => t.id);
-      const hasMatchingTag = filterState.tagIds.some((id) =>
+      const hasMatchingTag = filterState.tagIds.every((id) =>
         itemTagIds.includes(id)
       );
       if (!hasMatchingTag) return false;

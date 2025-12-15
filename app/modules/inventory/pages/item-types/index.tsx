@@ -28,7 +28,7 @@ export default function ItemTypesIndex() {
 
     if (filterState.tagIds.length > 0) {
       const typeTagIds = type.tags.map((t) => t.id);
-      const hasMatchingTag = filterState.tagIds.some((id) =>
+      const hasMatchingTag = filterState.tagIds.every((id) =>
         typeTagIds.includes(id)
       );
       if (!hasMatchingTag) return false;
