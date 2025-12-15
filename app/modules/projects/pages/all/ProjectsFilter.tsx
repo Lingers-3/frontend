@@ -1,4 +1,13 @@
-import { Filter, Search, X } from "lucide-react";
+import {
+  Filter,
+  Search,
+  X,
+  Calendar,
+  Clock,
+  ListOrdered,
+  ArrowDownAZ,
+  ArrowUpZA,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -14,9 +23,17 @@ import { Input } from "~/components/ui/input";
 import { cn } from "~/lib/utils";
 import { ProjectState } from "../../services/types";
 
+export type ProjectSortOption =
+  | "created_at"
+  | "deadline"
+  | "state"
+  | "updated_at";
+
 export interface ProjectFilterState {
   search: string;
   state: ProjectState | "All";
+  sortBy: ProjectSortOption;
+  sortDir: "asc" | "desc";
 }
 
 interface ProjectsFilterProps {
@@ -40,16 +57,42 @@ export function ProjectsFilter({ state, onChange }: ProjectsFilterProps) {
   const updateState = (val: ProjectState | "All") =>
     setInternalState((prev) => ({ ...prev, state: val }));
 
+  const updateSortBy = (val: ProjectSortOption) =>
+    setInternalState((prev) => ({ ...prev, sortBy: val }));
+
+  const updateSortDir = (val: "asc" | "desc") =>
+    setInternalState((prev) => ({ ...prev, sortDir: val }));
+
   const applyFilters = () => {
     onChange(internalState);
     setOpen(false);
   };
 
   const resetFilters = () => {
-    const emptyState: ProjectFilterState = { search: "", state: "All" };
+    const emptyState: ProjectFilterState = {
+      search: "",
+      state: "All",
+      sortBy: "updated_at",
+      sortDir: "desc",
+    };
     setInternalState(emptyState);
     onChange(emptyState);
     setOpen(false);
+  };
+
+  const getSortLabel = (key: ProjectSortOption) => {
+    switch (key) {
+      case "created_at":
+        return "Created Date";
+      case "deadline":
+        return "Deadline";
+      case "state":
+        return "Status";
+      case "updated_at":
+        return "Last Updated";
+      default:
+        return key;
+    }
   };
 
   return (
@@ -62,9 +105,11 @@ export function ProjectsFilter({ state, onChange }: ProjectsFilterProps) {
           <div className="flex items-center gap-3 flex-1 overflow-hidden">
             <Search className="w-5 h-5 text-dracula-comment group-hover:text-dracula-purple transition-colors" />
 
-            {state.search === "" && state.state === "All" ? (
+            {state.search === "" &&
+            state.state === "All" &&
+            state.sortBy === "updated_at" ? (
               <span className="text-dracula-comment text-sm">
-                Search or filter by status...
+                Search, filter, or sort...
               </span>
             ) : (
               <div className="flex gap-2 items-center overflow-x-auto no-scrollbar mask-gradient-right">
@@ -82,6 +127,14 @@ export function ProjectsFilter({ state, onChange }: ProjectsFilterProps) {
                     Status: {state.state}
                   </Badge>
                 )}
+
+                <Badge
+                  variant="outline"
+                  className="border-dracula-orange/50 text-dracula-orange gap-1 whitespace-nowrap"
+                >
+                  Sort: {getSortLabel(state.sortBy)} (
+                  {state.sortDir === "asc" ? "Asc" : "Desc"})
+                </Badge>
               </div>
             )}
           </div>
@@ -96,15 +149,16 @@ export function ProjectsFilter({ state, onChange }: ProjectsFilterProps) {
 
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
-        className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg"
+        className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg overflow-y-auto max-h-[90vh]"
       >
         <DialogHeader>
           <DialogTitle className="text-dracula-foreground">
-            Filter Projects
+            Filter & Sort Projects
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6 mt-2">
+          {/* Search Section */}
           <div className="space-y-2">
             <label className="text-xs font-semibold text-dracula-comment uppercase tracking-wider">
               Search
@@ -126,6 +180,7 @@ export function ProjectsFilter({ state, onChange }: ProjectsFilterProps) {
             </div>
           </div>
 
+          {/* Status Section */}
           <div className="space-y-2">
             <label className="text-xs font-semibold text-dracula-comment uppercase tracking-wider">
               Status
@@ -147,6 +202,99 @@ export function ProjectsFilter({ state, onChange }: ProjectsFilterProps) {
                   </button>
                 )
               )}
+            </div>
+          </div>
+
+          <div className="h-px bg-dracula-selection/50 my-2" />
+
+          {/* Sorting Section */}
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-dracula-comment uppercase tracking-wider">
+                Sort By
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => updateSortBy("created_at")}
+                  className={cn(
+                    "flex items-center justify-center gap-2 p-2 rounded-lg border transition-all text-sm font-medium",
+                    internalState.sortBy === "created_at"
+                      ? "bg-dracula-orange/20 border-dracula-orange text-dracula-orange"
+                      : "bg-dracula-current-line/40 border-dracula-selection text-dracula-comment hover:bg-dracula-current-line"
+                  )}
+                >
+                  <Calendar className="w-4 h-4" />
+                  Created Date
+                </button>
+                <button
+                  onClick={() => updateSortBy("deadline")}
+                  className={cn(
+                    "flex items-center justify-center gap-2 p-2 rounded-lg border transition-all text-sm font-medium",
+                    internalState.sortBy === "deadline"
+                      ? "bg-dracula-orange/20 border-dracula-orange text-dracula-orange"
+                      : "bg-dracula-current-line/40 border-dracula-selection text-dracula-comment hover:bg-dracula-current-line"
+                  )}
+                >
+                  <Clock className="w-4 h-4" />
+                  Deadline
+                </button>
+                <button
+                  onClick={() => updateSortBy("state")}
+                  className={cn(
+                    "flex items-center justify-center gap-2 p-2 rounded-lg border transition-all text-sm font-medium",
+                    internalState.sortBy === "state"
+                      ? "bg-dracula-orange/20 border-dracula-orange text-dracula-orange"
+                      : "bg-dracula-current-line/40 border-dracula-selection text-dracula-comment hover:bg-dracula-current-line"
+                  )}
+                >
+                  <ListOrdered className="w-4 h-4" />
+                  Status
+                </button>
+                <button
+                  onClick={() => updateSortBy("updated_at")}
+                  className={cn(
+                    "flex items-center justify-center gap-2 p-2 rounded-lg border transition-all text-sm font-medium",
+                    internalState.sortBy === "updated_at"
+                      ? "bg-dracula-orange/20 border-dracula-orange text-dracula-orange"
+                      : "bg-dracula-current-line/40 border-dracula-selection text-dracula-comment hover:bg-dracula-current-line"
+                  )}
+                >
+                  <Calendar className="w-4 h-4" />
+                  Updated
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-dracula-comment uppercase tracking-wider">
+                Direction
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => updateSortDir("asc")}
+                  className={cn(
+                    "flex items-center justify-center gap-2 p-2 rounded-lg border transition-all text-sm font-medium",
+                    internalState.sortDir === "asc"
+                      ? "bg-dracula-cyan/20 border-dracula-cyan text-dracula-cyan"
+                      : "bg-dracula-current-line/40 border-dracula-selection text-dracula-comment hover:bg-dracula-current-line"
+                  )}
+                >
+                  <ArrowDownAZ className="w-4 h-4" />
+                  Ascending
+                </button>
+                <button
+                  onClick={() => updateSortDir("desc")}
+                  className={cn(
+                    "flex items-center justify-center gap-2 p-2 rounded-lg border transition-all text-sm font-medium",
+                    internalState.sortDir === "desc"
+                      ? "bg-dracula-cyan/20 border-dracula-cyan text-dracula-cyan"
+                      : "bg-dracula-current-line/40 border-dracula-selection text-dracula-comment hover:bg-dracula-current-line"
+                  )}
+                >
+                  <ArrowUpZA className="w-4 h-4" />
+                  Descending
+                </button>
+              </div>
             </div>
           </div>
 

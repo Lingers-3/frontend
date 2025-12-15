@@ -13,10 +13,11 @@ export default function ProjectsIndex() {
   const [filterState, setFilterState] = useState<ProjectFilterState>({
     search: "",
     state: "All",
+    sortBy: "updated_at",
+    sortDir: "desc",
   });
 
   const filteredProjects = projects?.filter((proj) => {
-    // 1. Search Filter
     if (
       filterState.search &&
       !proj.name.toLowerCase().includes(filterState.search.toLowerCase())
@@ -24,7 +25,6 @@ export default function ProjectsIndex() {
       return false;
     }
 
-    // 2. State Filter
     if (filterState.state !== "All" && proj.state !== filterState.state) {
       return false;
     }
@@ -32,11 +32,38 @@ export default function ProjectsIndex() {
     return true;
   });
 
-  // Sort projects by Updated At desc (newest changes first)
-  const sortedProjects = filteredProjects?.sort(
-    (a, b) =>
-      new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-  );
+  const sortedProjects = filteredProjects?.sort((a, b) => {
+    let valA: string | number = "";
+    let valB: string | number = "";
+
+    switch (filterState.sortBy) {
+      case "created_at":
+        valA = new Date(a.created_at).getTime();
+        valB = new Date(b.created_at).getTime();
+        break;
+      case "updated_at":
+        valA = new Date(a.updated_at).getTime();
+        valB = new Date(b.updated_at).getTime();
+        break;
+      case "state":
+        valA = a.state;
+        valB = b.state;
+        break;
+      case "deadline":
+        const dateA = a.actual_deadline || a.planned_deadline;
+        const dateB = b.actual_deadline || b.planned_deadline;
+        valA = dateA ? new Date(dateA).getTime() : 0;
+        valB = dateB ? new Date(dateB).getTime() : 0;
+        break;
+      default:
+        valA = new Date(a.updated_at).getTime();
+        valB = new Date(b.updated_at).getTime();
+    }
+
+    if (valA < valB) return filterState.sortDir === "asc" ? -1 : 1;
+    if (valA > valB) return filterState.sortDir === "asc" ? 1 : -1;
+    return 0;
+  });
 
   const NoProjects = () => (
     <div className="flex flex-col items-center justify-center h-full min-h-[60vh] w-full p-8 rounded-xl border-2 border-dashed border-dracula-current-line/50 bg-dracula-current-line/20">
@@ -92,7 +119,14 @@ export default function ProjectsIndex() {
           <p className="text-lg">No projects match your filters.</p>
           <Button
             variant="link"
-            onClick={() => setFilterState({ search: "", state: "All" })}
+            onClick={() =>
+              setFilterState({
+                search: "",
+                state: "All",
+                sortBy: "updated_at",
+                sortDir: "desc",
+              })
+            }
             className="text-dracula-purple mt-2"
           >
             Clear filters
