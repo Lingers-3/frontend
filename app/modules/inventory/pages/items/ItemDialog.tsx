@@ -36,8 +36,10 @@ export default function ItemDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
+      <DialogTrigger asChild>{trigger}</DialogTrigger>{" "}
+      {mode === "create" && (
+        <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
+      )}
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         className="rounded-2xl bg-dracula-background border-dracula-selection max-w-lg"
