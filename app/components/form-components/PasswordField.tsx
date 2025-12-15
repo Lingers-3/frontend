@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Eye, EyeOff } from "lucide-react";
 import { ErrorMessages } from "./ErrorMessages";
-import { useFieldContext } from "~/modules/inventory/hooks/use-app-form";
+import { useFieldContext } from "~/hooks/use-app-form";
 
 export function PasswordField({
   label,

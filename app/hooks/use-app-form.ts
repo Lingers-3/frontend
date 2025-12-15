@@ -1,12 +1,10 @@
+import { Select } from '@radix-ui/react-select';
 import { createFormHook } from '@tanstack/react-form'
-
-import { TextField } from '../../../components/form-components/TextField'
-import { Select } from '../../../components/form-components/Select'
-import { TextArea } from '../../../components/form-components/TextArea'
-import { PasswordField } from '../../../components/form-components/PasswordField'
-import { SubscribeButton } from '../../../components/form-components/SubscribeButton'
-
 import { createFormHookContexts } from "@tanstack/react-form";
+import { PasswordField } from '~/components/form-components/PasswordField';
+import { SubscribeButton } from '~/components/form-components/SubscribeButton';
+import { TextArea } from '~/components/form-components/TextArea';
+import { TextField } from '~/components/form-components/TextField';
 
 export const { 
   fieldContext, 

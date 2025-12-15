@@ -1,8 +1,8 @@
 import { toast } from "sonner";
 import { z } from "zod";
 import { useCreateItemType, useUpdateItemType } from "./inventory-hooks";
-import { useAppForm } from "./use-app-form";
 import type { ItemTypeFormProps } from "~/modules/inventory/pages/item-types/ItemTypeForm";
+import { useAppForm } from "~/hooks/use-app-form";
 
 const itemTypeSchema = z.object({
   name: z.string().min(1, "Name is required"),

@@ -1,5 +1,3 @@
-import type { ApiError } from "./api";
-
 export type Result<T, E> =
   | {
       ok: true;

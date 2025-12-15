@@ -1,10 +1,10 @@
-import type { Route } from "./+types/projects";
-import AppEmpty from "~/components/app/AppEmpty";
+import type { Route } from "../+types";
+import { ProjectsIndex } from "~/modules/projects/pages";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Projects | Pocketeer" }];
 }
 
 export default function Projects() {
-  return <AppEmpty />;
+  return <ProjectsIndex />;
 }

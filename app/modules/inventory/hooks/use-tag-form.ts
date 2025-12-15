@@ -1,8 +1,8 @@
 import { toast } from "sonner";
 import { z } from "zod";
 import { useCreateTag, useUpdateTag } from "./inventory-hooks";
-import { useAppForm } from "./use-app-form";
 import type { TagFormProps } from "~/modules/inventory/pages/tags/TagForm";
+import { useAppForm } from "~/hooks/use-app-form";
 
 const tagSchema = z.object({
   name: z.string().min(1, "Name is required"),

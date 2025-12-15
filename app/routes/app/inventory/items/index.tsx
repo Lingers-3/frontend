@@ -5,6 +5,6 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "Items | Pocketeer" }];
 }
 
-export default function InventoryLayout() {
+export default function Items() {
   return <ItemsIndex />
 }

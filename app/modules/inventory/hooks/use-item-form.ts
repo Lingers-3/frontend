@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { z } from "zod";
+import { useAppForm } from "~/hooks/use-app-form";
 import { useCreateItem, useUpdateItem } from "~/modules/inventory/hooks/inventory-hooks";
-import { useAppForm } from "~/modules/inventory/hooks/use-app-form";
 import type { ItemFormProps } from "~/modules/inventory/pages/items/ItemForm";
 
 const itemSchema = z.object({

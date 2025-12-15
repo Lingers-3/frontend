@@ -2,7 +2,7 @@ import { useStore } from "@tanstack/react-form";
 import { Label } from "../ui/label";
 import { Slider as ShadcnSlider } from "~/components/ui/slider";
 import { ErrorMessages } from "./ErrorMessages";
-import { useFieldContext } from "~/modules/inventory/hooks/use-app-form";
+import { useFieldContext } from "~/hooks/use-app-form";
 
 export function Slider({ label }: { label: string }) {
   const field = useFieldContext<number>();

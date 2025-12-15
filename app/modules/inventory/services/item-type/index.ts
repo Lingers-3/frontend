@@ -1,6 +1,6 @@
 import axios, { type AxiosError } from "axios";
-import api, { type ApiError } from "~/lib/api"; 
-import { type Result, Ok, Err } from "~/lib/result"; 
+import api, { type ApiError } from "~/lib/api";
+import { type Result, Ok, Err } from "~/lib/result";
 import type {
   ItemType,
   ItemTypeCreate,
@@ -18,7 +18,7 @@ export class itemType {
       return Err(itemType.error(e));
     }
   }
-  
+
   static async create(
     payload: ItemTypeCreate
   ): Promise<Result<ItemType, ApiError>> {
@@ -53,10 +53,7 @@ export class itemType {
     payload: ItemTypeUpdate
   ): Promise<Result<ItemType, ApiError>> {
     try {
-      const response = await api.patch<ItemType>(
-        `/item-types/${id}`,
-        payload
-      );
+      const response = await api.patch<ItemType>(`/item-types/${id}`, payload);
       return Ok(response.data);
     } catch (e) {
       return Err(itemType.error(e));

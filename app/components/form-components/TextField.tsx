@@ -3,7 +3,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { ErrorMessages } from "./ErrorMessages";
 import { cn } from "~/lib/utils";
-import { useFieldContext } from "~/modules/inventory/hooks/use-app-form";
+import { useFieldContext } from "~/hooks/use-app-form";
 
 export function TextField({
   label,

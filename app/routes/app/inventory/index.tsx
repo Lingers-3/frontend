@@ -9,7 +9,7 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "Inventory | Pocketeer" }];
 }
 
-export default function InventoryLayout() {
+export default function InventoryIndex() {
   const nav = useNavigate();
   const loc = useLocation();
 

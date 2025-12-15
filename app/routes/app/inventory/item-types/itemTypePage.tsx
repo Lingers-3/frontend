@@ -5,6 +5,6 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "Item type | Pocketeer" }];
 }
 
-export default function InventoryLayout() {
+export default function ItemType() {
   return <ItemTypePage />
 }

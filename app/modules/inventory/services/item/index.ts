@@ -1,6 +1,6 @@
 import axios, { type AxiosError } from "axios";
-import api, { type ApiError } from "~/lib/api"; 
-import { type Result, Ok, Err } from "~/lib/result"; 
+import api, { type ApiError } from "~/lib/api";
+import { type Result, Ok, Err } from "~/lib/result";
 import type {
   Item,
   ItemCreate,
@@ -18,7 +18,7 @@ export class item {
       return Err(item.error(e));
     }
   }
-  
+
   static async create(payload: ItemCreate): Promise<Result<Item, ApiError>> {
     try {
       const response = await api.post<Item>("/items", payload);

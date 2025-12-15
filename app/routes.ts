@@ -14,7 +14,11 @@ export default [
       ]),
     ]),
 
-    route("projects", "./routes/app/projects.tsx"),
+    route("projects", "./routes/app/projects/layout.tsx", [
+        index("./routes/app/projects/index.tsx"), 
+        route(":projectId", "./routes/app/projects/projectPage.tsx"), 
+    ]),
+
     route("templates", "./routes/app/templates.tsx"),
     route("settings", "./routes/app/settings.tsx"),
   ]),
