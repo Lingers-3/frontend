@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogOverlay,
 } from "~/components/ui/dialog";
-import type { ProjectFull } from "../../services/types";
+import type { ProjectFull } from "../../services/project/types";
 import ProjectForm from "./ProjectFrom";
 
 type ProjectDialogProps =

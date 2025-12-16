@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { unwrap } from "~/lib/result";
-import { project } from "../services";
+import { project } from "../services/project";
 import type {
   ProjectSearchQuery,
   ProjectCreateRequest,
@@ -14,7 +14,7 @@ import type {
   UpdateResourceUsageRequest,
   AddReservationRequest,
   UpdateReservationRequest,
-} from "../services/types";
+} from "../services/project/types";
 
 export const PROJECT_KEYS = {
   all: ["projects"] as const,

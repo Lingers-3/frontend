@@ -1,6 +1,6 @@
 import { Edit2, Calendar, Clock, Banknote } from "lucide-react";
 import { cn } from "~/lib/utils";
-import { ProjectState, type ProjectFull } from "../../services/types";
+import { ProjectState, type ProjectFull } from "../../services/project/types";
 import ProjectMetricsDialog from "../forms/ProjectMetricsDialog";
 import { formatDate } from ".";
 

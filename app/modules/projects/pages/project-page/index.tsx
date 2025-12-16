@@ -2,11 +2,11 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { Button } from "~/components/ui/button";
 import { useProject } from "../../hooks/projects-hooks";
-import { ProjectState } from "../../services/types";
+import { ProjectState } from "../../services/project/types";
 import { ProjectActionsCard } from "./ProjectActionsCard";
 import { ProjectInfoCard } from "./ProjectInfoCard";
 import { ProjectMetricsCard } from "./ProjectMetricsCard";
-import { ProjectResourcesPanel } from "./ProjectResourcesPanel";
+import { ProjectResourcesPanel } from "./resources";
 
 export const formatDate = (dateStr?: string) => {
   if (!dateStr) return "-";
@@ -82,7 +82,7 @@ export default function ProjectPage() {
           className="pl-0 ml-0 text-lg text-dracula-comment hover:text-dracula-purple gap-2 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Projects
+          Back to projects
         </Button>
       </div>
 

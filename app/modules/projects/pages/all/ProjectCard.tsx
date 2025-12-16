@@ -1,6 +1,6 @@
 import { Calendar, Clock, Banknote } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
-import { type Project, ProjectState } from "../../services/types";
+import { type Project, ProjectState } from "../../services/project/types";
 import { ProjectCardOptions } from "./ProjectsCardOptions";
 
 interface ProjectCardProps {

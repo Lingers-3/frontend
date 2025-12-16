@@ -96,6 +96,13 @@ export const useItemsFull = () => {
   });
 };
 
+export const useItems = () => {
+  return useQuery({
+    queryKey: INVENTORY_KEYS.items.full,
+    queryFn: () => unwrap(item.getAll()),
+  });
+};
+
 export const useCreateItem = () => {
   const queryClient = useQueryClient();
 

@@ -11,7 +11,7 @@ import {
 } from "~/components/ui/dialog";
 import ProjectMetricsForm from "./ProjectMetricsForm";
 import type { MetricsType } from "../../hooks/use-project-metrics-form";
-import type { ProjectFull } from "../../services/types";
+import type { ProjectFull } from "../../services/project/types";
 
 interface ProjectMetricsDialogProps {
   project: ProjectFull;

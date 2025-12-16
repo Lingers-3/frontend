@@ -2,7 +2,7 @@ import { Edit2, Clock } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
-import type { ProjectFull } from "../../services/types";
+import type { ProjectFull } from "../../services/project/types";
 import ProjectDialog from "../forms/ProjectDialog";
 import { formatDateTime, getStatusColor } from ".";
 

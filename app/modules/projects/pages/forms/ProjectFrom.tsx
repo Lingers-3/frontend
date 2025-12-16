@@ -1,6 +1,6 @@
 import { Button } from "~/components/ui/button";
 import { AppFormField } from "~/components/form-components/AppFormField";
-import type { ProjectFull } from "../../services/types";
+import type { ProjectFull } from "../../services/project/types";
 import { useProjectForm } from "../../hooks/use-project-form";
 
 export interface ProjectFormProps {

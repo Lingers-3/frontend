@@ -5,7 +5,7 @@ import {
   useCompleteProject,
   useCancelProject,
 } from "../../hooks/projects-hooks";
-import { ProjectState, type ProjectFull } from "../../services/types";
+import { ProjectState, type ProjectFull } from "../../services/project/types";
 
 export const ProjectActionsCard = ({ project }: { project: ProjectFull }) => {
   const { mutate: startProject, isPending: isStarting } = useStartProject();

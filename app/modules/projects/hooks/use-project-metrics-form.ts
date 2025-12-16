@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { z } from "zod";
 import { useAppForm } from "~/hooks/use-app-form";
-import type { ProjectFull } from "../services/types";
+import type { ProjectFull } from "../services/project/types";
 import { useUpdateProjectPlan, useUpdateProjectActualMetrics } from "./projects-hooks";
 
 export type MetricsType = "plan" | "actual";
