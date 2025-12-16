@@ -8,13 +8,14 @@ export interface ItemType {
   base_measurement_unit: string;
   display_measurement_unit: string;
   default_quantity: number | null;
-  shortage_threshold: number | null; 
+  shortage_threshold: number | null;
   picture_id: number | null;
+  picture_hash: string | null; 
   item_ids: number[];
   tag_ids: number[];
-  created_at: string; 
+  created_at: string;
   updated_at: string;
-  deleted_at: string | null; 
+  deleted_at: string | null;
 }
 
 export interface ItemTypeCreate {
@@ -25,6 +26,7 @@ export interface ItemTypeCreate {
   default_quantity?: number | null;
   shortage_threshold?: number | null;
   tag_ids?: number[];
+  picture_id?: number | null; 
 }
 
 export interface ItemTypeUpdate {
@@ -35,11 +37,12 @@ export interface ItemTypeUpdate {
   default_quantity?: number | null;
   shortage_threshold?: number | null;
   tag_ids?: number[];
-  restore?: boolean; 
+  picture_id?: number | null; 
+  restore?: boolean;
 }
 
 export interface ItemTypeDeleteResponse {
-  hard: boolean; 
+  hard: boolean;
 }
 
 export interface ItemTypeFull {
@@ -51,6 +54,7 @@ export interface ItemTypeFull {
   default_quantity: number | null;
   shortage_threshold: number | null;
   picture_id: number | null;
+  picture_hash: string | null; 
   items: ItemFull[];
   tags: TagShort[];
   created_at: string;

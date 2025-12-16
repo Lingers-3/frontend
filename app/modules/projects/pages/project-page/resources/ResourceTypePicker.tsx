@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Input } from "~/components/ui/input";
 import { useItemTypesFull } from "~/modules/inventory/hooks/inventory-hooks";
 import type { ItemTypeFull } from "~/modules/inventory/services/item-type/types";
+import { picture } from "~/modules/inventory/services/picture/picture";
 
 interface ResourceTypePickerProps {
   onSelect: (itemType: ItemTypeFull) => void;
@@ -46,7 +47,7 @@ export default function ResourceTypePicker({
             <div className="h-24 bg-dracula-background w-full flex items-center justify-center relative">
               {type.picture_id ? (
                 <img
-                  src={`/api/images/${type.picture_id}`}
+                  src={picture.url(type.picture_hash) ?? ""}
                   alt={type.name}
                   className="w-full h-full object-cover"
                 />

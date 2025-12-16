@@ -4,6 +4,7 @@ import type { ItemTypeFull } from "~/modules/inventory/services/item-type/types"
 import type { ItemFull } from "~/modules/inventory/services/item/types";
 
 import { ItemTypeCardOptions } from "./ItemTypeCardOptions";
+import { picture } from "../../services/picture/picture";
 
 const isItemSmelling = (item: ItemFull): boolean => {
   if (!item.expiration_date) return false;
@@ -38,7 +39,7 @@ export const ItemTypeCard = ({ itemType }: ItemTypeCardProps) => {
       <div className="relative h-40 w-full bg-dracula-background flex items-center justify-center overflow-hidden">
         {itemType.picture_id ? (
           <img
-            src={`/api/images/${itemType.picture_id}`}
+            src={picture.url(itemType.picture_hash) ?? ""}
             alt={itemType.name}
             className="object-cover w-full h-full"
           />
