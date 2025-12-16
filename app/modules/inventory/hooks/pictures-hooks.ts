@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { unwrap } from "~/lib/result";
 import { picture } from "../services/picture/picture";
-import { useRef } from "react";
+import { useRef, useState, useCallback } from "react";
 import { toast } from "sonner";
 import type { ItemTypeFull } from "../services/item-type/types";
 import { useUpdateItemType } from "./inventory-hooks";
@@ -20,6 +20,7 @@ export const useDeletePicture = () => {
 
 export function useItemTypePicture(type: ItemTypeFull) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const uploadPicture = useUploadPicture();
   const deletePicture = useDeletePicture();
@@ -29,6 +30,38 @@ export function useItemTypePicture(type: ItemTypeFull) {
     uploadPicture.isPending ||
     deletePicture.isPending ||
     updateItemType.isPending;
+
+  const processUpload = useCallback(
+    async (file: File) => {
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please upload an image file");
+        return;
+      }
+
+      const oldPictureId = type.picture_id;
+
+      try {
+        const newPicture = await uploadPicture.mutateAsync(file);
+
+        await updateItemType.mutateAsync({
+          id: type.id,
+          payload: { picture_id: newPicture.id },
+        });
+
+        if (oldPictureId) {
+          deletePicture.mutateAsync(oldPictureId).catch((err) => {
+            console.error("Failed to cleanup old picture", err);
+          });
+        }
+
+        toast.success("Image updated successfully");
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to update image");
+      }
+    },
+    [type.id, type.picture_id, uploadPicture, updateItemType, deletePicture]
+  );
 
   const handleImageAreaClick = () => {
     if (isLoading) return;
@@ -40,31 +73,42 @@ export function useItemTypePicture(type: ItemTypeFull) {
   ) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
     event.target.value = "";
-
-    const oldPictureId = type.picture_id;
-
-    try {
-      const newPicture = await uploadPicture.mutateAsync(file);
-
-      await updateItemType.mutateAsync({
-        id: type.id,
-        payload: { picture_id: newPicture.id },
-      });
-
-      if (oldPictureId) {
-        deletePicture.mutateAsync(oldPictureId).catch((err) => {
-          console.error("Failed to cleanup old picture", err);
-        });
-      }
-
-      toast.success("Image updated successfully");
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to update image");
-    }
+    await processUpload(file);
   };
+
+  const handleDragOver = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!isLoading) {
+        setIsDragging(true);
+      }
+    },
+    [isLoading]
+  );
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  }, []);
+
+  const handleDrop = useCallback(
+    async (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(false);
+
+      if (isLoading) return;
+
+      const file = e.dataTransfer.files?.[0];
+      if (file) {
+        await processUpload(file);
+      }
+    },
+    [isLoading, processUpload]
+  );
 
   const handleImageDelete = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -90,8 +134,14 @@ export function useItemTypePicture(type: ItemTypeFull) {
   return {
     fileInputRef,
     isLoading,
+    isDragging,
     handleImageAreaClick,
     handleFileChange,
     handleImageDelete,
+    dragProps: {
+      onDragOver: handleDragOver,
+      onDragLeave: handleDragLeave,
+      onDrop: handleDrop,
+    },
   };
 }

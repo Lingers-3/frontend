@@ -12,6 +12,7 @@ import { ItemTypeInfoTags } from "./ItemTypeInfoTags";
 import { ItemTypeInfoActions } from "./ItemTypeInfoActions";
 import { picture } from "~/modules/inventory/services/picture/picture";
 import { useItemTypePicture } from "~/modules/inventory/hooks/pictures-hooks";
+import { cn } from "~/lib/utils";
 
 interface ItemTypeInfoProps {
   type: ItemTypeFull;
@@ -21,9 +22,11 @@ export function ItemTypeInfo({ type }: ItemTypeInfoProps) {
   const {
     fileInputRef,
     isLoading,
+    isDragging,
     handleImageAreaClick,
     handleFileChange,
     handleImageDelete,
+    dragProps,
   } = useItemTypePicture(type);
 
   const totalQuantity = type.items.reduce((acc, i) => acc + i.quantity, 0);
@@ -50,8 +53,15 @@ export function ItemTypeInfo({ type }: ItemTypeInfoProps) {
         />
 
         <div
+          {...dragProps}
           onClick={handleImageAreaClick}
-          className="group relative w-full aspect-square rounded-xl bg-dracula-background border border-dracula-selection flex items-center justify-center text-dracula-purple overflow-hidden cursor-pointer hover:border-dracula-cyan/50 transition-colors"
+          className={cn(
+            "group relative w-full aspect-square rounded-xl flex items-center justify-center overflow-hidden cursor-pointer transition-all duration-200",
+            "bg-dracula-background border border-dracula-selection text-dracula-purple",
+            !isDragging && "hover:border-dracula-cyan/50",
+            isDragging &&
+              "border-2 border-dashed border-dracula-cyan bg-dracula-cyan/10 scale-[1.02]"
+          )}
         >
           {isLoading && (
             <div className="absolute inset-0 bg-dracula-background/80 z-20 flex items-center justify-center">
@@ -63,24 +73,51 @@ export function ItemTypeInfo({ type }: ItemTypeInfoProps) {
             <img
               src={picture.url(type.picture_hash) ?? ""}
               alt={type.name}
-              className="w-full h-full object-cover transition-opacity group-hover:opacity-80"
+              className={cn(
+                "w-full h-full object-cover transition-opacity",
+                isDragging ? "opacity-40" : "group-hover:opacity-80"
+              )}
             />
           ) : (
             <div className="flex flex-col items-center gap-2 transition-transform group-hover:scale-105">
-              <Package className="w-20 h-20" />
-              <span className="text-xs text-dracula-comment font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                Click to upload
+              <Package
+                className={cn(
+                  "w-20 h-20 transition-colors",
+                  isDragging && "text-dracula-cyan"
+                )}
+              />
+              <span
+                className={cn(
+                  "text-xs font-medium transition-opacity",
+                  isDragging
+                    ? "text-dracula-cyan opacity-100"
+                    : "text-dracula-comment opacity-0 group-hover:opacity-100"
+                )}
+              >
+                {isDragging ? "Drop image here" : "Click to upload"}
               </span>
             </div>
           )}
 
-          {type.picture_id && !isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-              <Upload className="w-8 h-8 text-white drop-shadow-md" />
+          {(type.picture_id || isDragging) && !isLoading && (
+            <div
+              className={cn(
+                "absolute inset-0 flex items-center justify-center transition-opacity pointer-events-none",
+                isDragging
+                  ? "opacity-100"
+                  : "opacity-0 group-hover:opacity-100 bg-black/20"
+              )}
+            >
+              <Upload
+                className={cn(
+                  "w-8 h-8 drop-shadow-md",
+                  isDragging ? "text-dracula-cyan" : "text-white"
+                )}
+              />
             </div>
           )}
 
-          {type.picture_id && !isLoading && (
+          {type.picture_id && !isLoading && !isDragging && (
             <button
               onClick={handleImageDelete}
               className="absolute top-2 right-2 z-10 cursor-pointer p-2 bg-dracula-background/80 backdrop-blur-sm border-dracula-selection border-[1px] hover:bg-dracula-red/20 rounded-md text-dracula-comment hover:text-dracula-red transition-all opacity-0 group-hover:opacity-100"
