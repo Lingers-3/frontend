@@ -9,7 +9,7 @@ export default function ProjectsLayout() {
         <AppSidebarTrigger />
         <ToggleThemeButton />
       </div>
-      <div className="p-7 pt-0 h-full">
+      <div className="p-7 pt-0 h-full bg-dracula-background">
         <Outlet />
       </div>
     </div>
