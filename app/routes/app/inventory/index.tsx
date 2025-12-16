@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { AppSidebarTrigger } from "~/components/app/AppSidebar";
-import ToggleThemeButton from "~/components/primitives/ToggleThemeButton";
+import ToggleThemeButton from "~/components/app/ToggleThemeButton";
 import { ViewModeSwitch } from "~/modules/inventory/pages/ViewModeSwitch";
 import type { Route } from "./items/+types";
 

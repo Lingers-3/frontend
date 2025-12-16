@@ -66,7 +66,7 @@ export default function ProjectsIndex() {
   });
 
   const NoProjects = () => (
-    <div className="flex flex-col items-center justify-center h-full min-h-[60vh] w-full p-8 rounded-xl border-2 border-dashed border-dracula-current-line/50 bg-dracula-current-line/20">
+    <div className="flex flex-col items-center justify-center h-full min-h-[70vh] w-full p-8 rounded-xl border-2 border-dashed border-dracula-current-line/50 bg-dracula-current-line/20">
       <FolderOpen className="w-16 h-16 text-dracula-purple mb-4 opacity-75" />
       <h2 className="text-xl font-semibold text-dracula-foreground mb-2">
         No projects yet

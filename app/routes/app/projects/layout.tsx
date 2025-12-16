@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import { AppSidebarTrigger } from "~/components/app/AppSidebar";
-import ToggleThemeButton from "~/components/primitives/ToggleThemeButton";
+import ToggleThemeButton from "~/components/app/ToggleThemeButton";
 
 export default function ProjectsLayout() {
   return (
@@ -9,7 +9,7 @@ export default function ProjectsLayout() {
         <AppSidebarTrigger />
         <ToggleThemeButton />
       </div>
-      <div className="p-7 pt-0">
+      <div className="p-7 pt-0 h-full">
         <Outlet />
       </div>
     </div>

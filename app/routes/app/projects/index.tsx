@@ -1,4 +1,4 @@
-import ProjectsIndex from "~/modules/projects/pages/all";
+import ProjectsIndex from "~/modules/projects/pages/main";
 import type { Route } from "../+types";
 
 export function meta({}: Route.MetaArgs) {

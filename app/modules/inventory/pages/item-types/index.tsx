@@ -4,13 +4,11 @@ import { useItemTypesFull } from "~/modules/inventory/hooks/inventory-hooks";
 import { ItemTypeCard } from "./ItemTypeCard";
 import { Button } from "~/components/ui/button";
 import ItemTypeDialog from "~/modules/inventory/pages/item-types/ItemTypeDialog";
-import { useSeedDatabase } from "../../hooks/use-seed-database";
 import { PlusCircle, Search } from "lucide-react";
 import { ItemTypesFilter, type FilterState } from "./ItemTypesFilter";
 
 export default function ItemTypesIndex() {
   const { data: itemTypes, isLoading, isError } = useItemTypesFull();
-  const { seed } = useSeedDatabase();
 
   const [filterState, setFilterState] = useState<FilterState>({
     search: "",
@@ -62,12 +60,6 @@ export default function ItemTypesIndex() {
             </Button>
           }
         />
-        <Button
-          className="bg-dracula-comment hover:bg-dracula-comment/80 text-dracula-background font-bold shadow-md gap-2 rounded-xl"
-          onClick={seed}
-        >
-          Seed db [dev]
-        </Button>
       </div>
     </div>
   );

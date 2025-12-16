@@ -12,7 +12,7 @@ import { AppearanceSettings } from "./AppearanceSettings";
 import { HelpSettings } from "./HelpSettings";
 import { NotificationsSettings } from "./NotificationsSettings";
 import { PrivacySettings } from "./PrivacySettings";
-import { TagsSettings } from "./TagsSettings"; 
+import { TagsSettings } from "./TagsSettings";
 
 interface SettingsOptionProps {
   label: string;
@@ -26,6 +26,8 @@ function getDialogContent(label: string) {
   switch (label) {
     case "Account":
       return <AccountSettings />;
+    case "Tags management":
+      return <TagsSettings />;
     case "Notifications":
       return <NotificationsSettings />;
     case "Privacy & Security":
@@ -34,8 +36,6 @@ function getDialogContent(label: string) {
       return <AppearanceSettings />;
     case "Help & Support":
       return <HelpSettings />;
-    case "Tags management": 
-      return <TagsSettings />;
     default:
       return <></>;
   }
@@ -75,7 +75,7 @@ export default function SettingsOption({
           <ChevronRight className="h-5 w-5 text-dracula-text-secondary" />
         </button>
       </DialogTrigger>
-      <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" /> 
+      <DialogOverlay className="fixed inset-0 bg-black/10 backdrop-blur-sm" />
       <DialogContent className="rounded-2xl bg-dracula-background border-dracula-current-line">
         <DialogHeader>
           <DialogTitle className="text-dracula-text-primary">
