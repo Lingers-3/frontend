@@ -1,4 +1,4 @@
-import { Moon, SearchIcon, Sun } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import {
   Empty,
   EmptyHeader,
@@ -13,7 +13,7 @@ import {
 } from "../ui/input-group";
 import { Kbd } from "../ui/kbd";
 import { AppSidebarTrigger } from "./AppSidebar";
-import ToggleThemeButton from "../primitives/ToggleThemeButton";
+import ToggleThemeButton from "./ToggleThemeButton";
 
 export default function AppEmpty() {
   return (

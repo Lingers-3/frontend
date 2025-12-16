@@ -85,16 +85,15 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           <div className="h-px w-full bg-dracula-selection/50"></div>
 
           <div className="flex justify-between items-center text-sm">
-            <div
-              className="flex items-center gap-1.5 text-dracula-foreground/80"
-              title="Work Time"
-            >
-              <Clock className="w-4 h-4 text-dracula-comment" />
-              <span className="font-mono">{time ? `${time}h` : "-"}</span>
+            <div className="flex items-center gap-1.5 text-dracula-foreground/80 min-w-0">
+              <Clock className="w-4 h-4 text-dracula-comment shrink-0" />
+              <span className="font-mono truncate">
+                {time ? `${time}h` : "-"}
+              </span>
             </div>
 
             <div
-              className="flex items-center gap-1.5 font-bold text-dracula-green"
+              className="flex items-center gap-1.5 font-bold text-dracula-green pl-2"
               title="Income"
             >
               <span className="font-mono">

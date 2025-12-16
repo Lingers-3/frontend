@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { GradientButton } from "~/components/primitives/GradientButton";
+import { GradientButton } from "~/pages/landing/GradientButton";
 import { useUser } from "~/hooks/use-user";
 import { auth } from "~/services/auth";
 

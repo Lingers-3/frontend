@@ -1,10 +1,11 @@
 import { AppSidebarTrigger } from "~/components/app/AppSidebar";
-import ToggleThemeButton from "~/components/primitives/ToggleThemeButton";
+import ToggleThemeButton from "~/components/app/ToggleThemeButton";
 import SettingsOption from "./SettingsOption";
 import LogoutButton from "./account/LogoutButton";
 import AvatarSection from "./AvatarSection";
 import { settingsOptions } from "./options";
 import { useUser } from "~/hooks/use-user";
+import { SeedDatabaseButton } from "~/components/app/SeedDatabaseButton";
 
 export default function SettingsPage() {
   const { data: user } = useUser();
@@ -32,6 +33,10 @@ export default function SettingsPage() {
               />
             ))}
           </div>
+        </div>
+
+        <div className="w-full flex items-center justify-center">
+          <SeedDatabaseButton />
         </div>
 
         <div className="flex items-center justify-center gap-3 mt-12">

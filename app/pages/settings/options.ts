@@ -11,16 +11,16 @@ export const settingsOptions = [
   { icon: UserIcon, label: "Account", description: "Manage your account" },
   { icon: Tag, label: "Tags management", description: "Manage your tags" },
   { icon: Bell, label: "Notifications", description: "Configure alerts" },
-  {
-    icon: Shield,
-    label: "Privacy & Security",
-    description: "Control your data",
-  },
-  {
-    icon: Palette,
-    label: "Appearance",
-    description: "Customize your experience",
-  },
+  // {
+  //   icon: Shield,
+  //   label: "Privacy & Security",
+  //   description: "Control your data",
+  // },
+  // {
+  //   icon: Palette,
+  //   label: "Appearance",
+  //   description: "Customize your experience",
+  // },
   {
     icon: HelpCircle,
     label: "Help & Support",

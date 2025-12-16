@@ -8,16 +8,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "~/components/ui/sidebar";
-import {
-  Drill,
-  FolderPen,
-  LayoutTemplate,
-  Settings,
-} from "lucide-react";
+import { Drill, FolderPen, LayoutTemplate, Settings } from "lucide-react";
 
 export function AppSidebar() {
   const { isMobile, toggleSidebar } = useSidebar();
-    const location = useLocation();
+  const location = useLocation();
 
   const menuItems = [
     { name: "Inventory", path: "/inventory/item-types", icon: <Drill /> },

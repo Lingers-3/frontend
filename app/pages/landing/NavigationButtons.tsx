@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import { GradientButton } from "~/components/primitives/GradientButton";
-import ToggleThemeButton from "~/components/primitives/ToggleThemeButton";
+import { GradientButton } from "~/pages/landing/GradientButton";
+import ToggleThemeButton from "~/components/app/ToggleThemeButton";
 import { auth } from "~/services/auth";
 
 const NavigationButtons: React.FC = () => {
