@@ -47,7 +47,7 @@ export default function ProjectMetricsDialog({
             </div>
             <div>
               <DialogTitle className="text-dracula-foreground text-xl">
-                {isPlan ? "Edit Project Plan" : "Update Actual Metrics"}
+                {isPlan ? "Edit project plan" : "Update actual metrics"}
               </DialogTitle>
               <DialogDescription className="text-dracula-comment">
                 {isPlan

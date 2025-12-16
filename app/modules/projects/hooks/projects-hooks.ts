@@ -93,8 +93,10 @@ export const useUpdateProjectActualMetrics = () => {
       id: number;
       payload: ProjectActualMetricsRequest;
     }) => unwrap(project.updateActualMetrics(id, payload)),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: PROJECT_KEYS.detail(data.id) });
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: PROJECT_KEYS.detail(variables.id),
+      });
       queryClient.invalidateQueries({ queryKey: PROJECT_KEYS.lists() });
     },
   });
@@ -147,8 +149,10 @@ export const useUpdateProjectPlan = () => {
       id: number;
       payload: ProjectPlanUpdateRequest;
     }) => unwrap(project.updatePlan(id, payload)),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: PROJECT_KEYS.detail(data.id) });
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: PROJECT_KEYS.detail(variables.id),
+      });
       queryClient.invalidateQueries({ queryKey: PROJECT_KEYS.lists() });
     },
   });

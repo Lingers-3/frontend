@@ -123,7 +123,7 @@ export class project {
     payload: ProjectPlanUpdateRequest
   ): Promise<Result<Project, ApiError>> {
     try {
-      const response = await api.put<Project>(`/projects/${id}/plan`, payload);
+      const response = await api.patch<Project>(`/projects/${id}/plan`, payload);
       return Ok(response.data);
     } catch (e) {
       return Err(project.error(e));

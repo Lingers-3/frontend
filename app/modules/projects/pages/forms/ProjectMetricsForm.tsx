@@ -1,7 +1,14 @@
 import { Button } from "~/components/ui/button";
 import { AppFormField } from "~/components/form-components/AppFormField";
-import { useProjectMetricsForm, type ProjectMetricsFormProps } from "../../hooks/use-project-metrics-form";
+import { useProjectMetricsForm, type MetricsType } from "../../hooks/use-project-metrics-form";
+import type { ProjectFull } from "../../services/project/types";
 
+export interface ProjectMetricsFormProps {
+  projectId: number;
+  project: ProjectFull;
+  metricsType: MetricsType;
+  onClose: () => void;
+}
 
 export default function ProjectMetricsForm(props: ProjectMetricsFormProps) {
   const { form, isPending } = useProjectMetricsForm(props);
@@ -22,7 +29,7 @@ export default function ProjectMetricsForm(props: ProjectMetricsFormProps) {
         <AppFormField
           form={form}
           name="income"
-          label={`${labelPrefix} Income`}
+          label={`${labelPrefix} income`}
           placeholder="0.00"
           type="number"
         />
@@ -30,7 +37,7 @@ export default function ProjectMetricsForm(props: ProjectMetricsFormProps) {
         <AppFormField
           form={form}
           name="work_time"
-          label={`${labelPrefix} Time (hours)`}
+          label={`${labelPrefix} time (hours)`}
           placeholder="0"
           type="number"
         />
@@ -39,7 +46,7 @@ export default function ProjectMetricsForm(props: ProjectMetricsFormProps) {
       <AppFormField
         form={form}
         name="deadline"
-        label={`${labelPrefix} Deadline`}
+        label={`${labelPrefix} deadline`}
         type="date"
       />
 

@@ -1,17 +1,15 @@
 import { toast } from "sonner";
 import { z } from "zod";
 import { useAppForm } from "~/hooks/use-app-form";
-import type { ProjectFull } from "../services/project/types";
-import { useUpdateProjectPlan, useUpdateProjectActualMetrics } from "./projects-hooks";
+import {
+  useUpdateProjectPlan,
+  useUpdateProjectActualMetrics,
+} from "./projects-hooks";
+import type { ProjectMetricsFormProps } from "../pages/forms/ProjectMetricsForm";
 
 export type MetricsType = "plan" | "actual";
 
-export interface ProjectMetricsFormProps {
-  projectId: number;
-  project: ProjectFull;
-  metricsType: MetricsType;
-  onClose: () => void;
-}
+const NS_PER_HOUR = 3600 * 1000 * 1000 * 1000;
 
 const metricsSchema = z.object({
   deadline: z.string().optional().nullable(),
@@ -40,12 +38,16 @@ export function useProjectMetricsForm({
       ? {
           deadline: project.planned_deadline || "",
           income: project.planned_income?.toString() || "",
-          work_time: project.planned_work_time?.toString() || "",
+          work_time: project.planned_work_time
+            ? (project.planned_work_time / NS_PER_HOUR).toString()
+            : "",
         }
       : {
           deadline: project.actual_deadline || "",
           income: project.actual_income?.toString() || "",
-          work_time: project.actual_work_time?.toString() || "",
+          work_time: project.actual_work_time
+            ? (project.actual_work_time / NS_PER_HOUR).toString()
+            : "",
         };
 
   const form = useAppForm({
@@ -65,10 +67,19 @@ export function useProjectMetricsForm({
         return errors;
       },
       onSubmit: async ({ value }) => {
+        let formattedDeadline = undefined;
+
+        if (value.deadline) {
+          formattedDeadline = new Date(value.deadline).toISOString();
+        }
+
+        const hoursInput = value.work_time ? Number(value.work_time) : 0;
+        const workTimeInNs = hoursInput * NS_PER_HOUR;
+
         const commonData = {
-          deadline: value.deadline || undefined,
+          deadline: formattedDeadline,
           income: value.income ? Number(value.income) : 0,
-          work_time: value.work_time ? Number(value.work_time) : 0,
+          work_time: workTimeInNs, 
         };
 
         if (metricsType === "plan") {
