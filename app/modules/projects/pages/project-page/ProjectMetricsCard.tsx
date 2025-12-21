@@ -111,7 +111,7 @@ export const ProjectMetricsCard = ({ project }: { project: ProjectFull }) => {
             <MetricItem
               icon={Clock}
               label="Time"
-              value={`${project.actual_work_time || 0} h`}
+              value={`${project.actual_work_time / (3600 * 1000 * 1000 * 1000) || 0} h`}
               colorClass="text-dracula-red"
             />
           </div>
